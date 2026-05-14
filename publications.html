@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="广东第二师范学院深度视觉实验室, 科研成果, 论文发表">
+    <meta name="description" content="广东第二师范学院深度视觉实验室科研成果与论文发表">
+    <title>科研成果 - 广东第二师范学院深度视觉实验室</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --primary-light: #eff6ff;
+        --accent-purple: #8b5cf6;
+        --text-main: #1f2937;
+        --text-muted: #6b7280;
+        --bg-light: #f8fafc;
+        --white: #ffffff;
+        --border: #e5e7eb;
+        --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.04);
+        --radius: 12px;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        color: var(--text-main);
+        background-color: var(--white);
+        -webkit-font-smoothing: antialiased;
+      }
+      a { text-decoration: none; transition: all 0.2s ease; }
+
+      .container-custom {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* === Header === */
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        height: 100px;
+        display: flex;
+        align-items: center;
+      }
+      .header-content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+      }
+      .header-left { display: flex; align-items: center; gap: 20px; }
+      .logo-u { height: 64px; }
+      .logo-s { height: 56px; }
+      .main-nav { display: flex; justify-content: center; gap: 32px; }
+      .main-nav a {
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--text-main);
+        position: relative;
+        padding-bottom: 4px;
+      }
+      .main-nav a:hover, .main-nav a.active { color: var(--primary); }
+      .main-nav a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      /* === Sub Hero === */
+      .sub-hero {
+        background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+        padding: 80px 0 40px;
+        text-align: center;
+        position: relative;
+      }
+      .sub-hero h1 {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+      .sub-hero .ghost-text {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+        font-weight: 900;
+        color: rgba(0,0,0,0.02);
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .sub-hero p {
+        color: var(--text-muted);
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+
+      /* === Stats === */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+        margin: 40px 0 60px;
+      }
+      .stat-card {
+        background: white;
+        padding: 32px;
+        border-radius: 20px;
+        text-align: center;
+        border: 1px solid var(--border);
+        transition: transform 0.3s ease;
+      }
+      .stat-card:hover { transform: translateY(-5px); border-color: var(--primary-light); }
+      .stat-number { font-size: 42px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+      .stat-label { font-size: 15px; color: var(--text-muted); font-weight: 500; }
+
+      /* === Filter === */
+      .filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        padding: 8px;
+        background: #f8fafc;
+        border-radius: 50px;
+        width: fit-content;
+      }
+      .filter-btn {
+        padding: 10px 24px;
+        border-radius: 50px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .filter-btn.active { background: white; color: var(--primary); box-shadow: var(--shadow); }
+
+      /* === Publication Lists === */
+      .year-group { margin-bottom: 60px; }
+      .year-header {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .year-header::after { content: ''; flex-grow: 1; height: 1px; background: var(--border); }
+      .count-badge {
+        font-size: 13px;
+        background: var(--primary-light);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 50px;
+      }
+
+      .pub-card {
+        background: white;
+        padding: 32px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        margin-bottom: 24px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      .pub-card:hover { transform: translateX(8px); border-color: var(--primary-light); box-shadow: var(--shadow); }
+      .pub-title { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 12px; line-height: 1.5; }
+      .pub-authors { font-size: 15px; color: var(--text-muted); margin-bottom: 8px; }
+      .pub-venue { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 16px; }
+      
+      .pub-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+      .badge {
+        font-size: 12px;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-weight: 600;
+        background: #f1f5f9;
+        color: #475569;
+      }
+      .badge.sci { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
+      .badge.ieee { background: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+
+      .pub-actions { display: flex; gap: 12px; }
+      .pub-link {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pub-link:hover { color: var(--primary); }
+
+      /* === Awards & Projects === */
+      .section-block { margin-bottom: 80px; }
+      .block-header { margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
+      .block-header h2 { font-size: 24px; font-weight: 800; color: #1e293b; }
+      .h-icon { color: var(--primary); }
+
+      .award-list { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      .award-item {
+        background: #f8fafc;
+        padding: 24px;
+        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid var(--border); /* 改为细边框或无边框 */
+        transition: all 0.2s ease;
+      }
+      .award-item:hover {
+        background: white;
+        border-color: var(--primary-light);
+        box-shadow: var(--shadow);
+      }
+      .award-info h4 { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+      .award-info p { font-size: 14px; color: var(--text-muted); }
+
+      /* === Footer === */
+      .main-footer {
+        background: #0f172a;
+        color: #94a3b8;
+        padding: 80px 0 40px;
+      }
+      .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+      .footer-logo img { height: 60px; margin-bottom: 20px; }
+      .footer-col h4 { color: white; margin-bottom: 24px; font-size: 16px; font-weight: 700; }
+      .footer-col p, .footer-col a { font-size: 14px; margin-bottom: 12px; display: block; color: #94a3b8; }
+      .footer-col a:hover { color: white; }
+      .footer-bottom {
+        margin-top: 60px;
+        padding-top: 32px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .main-nav { display: none; }
+        .footer-grid { grid-template-columns: 1fr; }
+        .award-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container-custom header-content">
+        <div class="header-left">
+          <img src="images/black logo.png" alt="GDEI" class="logo-u">
+          <img src="images/sch logo.png" alt="School" class="logo-s">
+        </div>
+        <nav class="main-nav">
+          <a href="index.html">首页</a>
+          <a href="research.html">研究方向</a>
+          <a href="people.html">团队成员</a>
+          <a href="publications.html" class="active">科研成果</a>
+          <a href="news.html">新闻动态</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="sub-hero">
+        <div class="container-custom">
+          <div class="ghost-text">PUBLICATIONS</div>
+          <h1>科研成果</h1>
+          <p>Publications & Achievements</p>
+        </div>
+      </section>
+
+      <div class="container-custom">
+        
+        <!-- Stats Section -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">7</div>
+            <div class="stat-label">发表论文</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">SCI 一区期刊</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">IEEE 国际会议</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">2025年新作</div>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="filter-btn active">全部成果</button>
+          <button class="filter-btn">期刊论文</button>
+          <button class="filter-btn">会议论文</button>
+          <button class="filter-btn">发明专利</button>
+        </div>
+
+        <!-- 2025 -->
+        <div class="year-group">
+          <div class="year-header">
+            <span>2025</span>
+            <span class="count-badge">3 Publications</span>
+          </div>
+
+          <div class="pub-card">
+            <h3 class="pub-title">Efficient Teacher Behavior Analysis via Adaptive Frame Sampling</h3>
+            <p class="pub-authors">Peiyuan Zeng, Yuhuang Zheng</p>
+            <p class="pub-venue">2025 International Conference on Computational Intelligence and Robotics (CIR)</p>
+            <div class="pub-meta">
+              <span class="badge ieee">IEEE 会议</span>
+              <span class="badge">教师行为分析</span>
+              <span class="badge">自适应采样</span>
+            </div>
+            <div class="pub-actions">
+              <a href="https://ieeexplore.ieee.org/author/114483825919132" class="pub-link"><i data-lucide="external-link"></i> IEEE Xplore</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <h3 class="pub-title">High-Accuracy Classification of Fertilized Eggs Using Mamba-Based Model</h3>
+            <p class="pub-authors">Peiyuan Zeng, Jiaqi Chen, Hongwei Yue, Fengchuang Xing, Shiming Wu, Shihang Huang, Linting Yang</p>
+            <p class="pub-venue">2025 6th International Conference on Artificial Intelligence and Electromechanical Automation (AIEA)</p>
+            <div class="pub-meta">
+              <span class="badge ieee">IEEE 会议</span>
+              <span class="badge">受精卵分类</span>
+              <span class="badge">Mamba 模型</span>
+            </div>
+            <div class="pub-actions">
+              <a href="https://ieeexplore.ieee.org/author/114483825919132" class="pub-link"><i data-lucide="external-link"></i> IEEE Xplore</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <h3 class="pub-title">CLIPVQA: Video Quality Assessment via CLIP</h3>
+            <p class="pub-authors">Fengchuang Xing, Mingjie Li, Yuan-Gen Wang, Guopu Zhu, Xiaochun Cao</p>
+            <p class="pub-venue">IEEE Transactions on Broadcasting, 2025</p>
+            <div class="pub-meta">
+              <span class="badge sci">SCI 一区</span>
+              <span class="badge">视频质量评估</span>
+              <span class="badge">深度学习</span>
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1109/TBC.2024.3511927" class="pub-link"><i data-lucide="link"></i> DOI Link</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="year-group">
+          <div class="year-header">
+            <span>2024</span>
+            <span class="count-badge">2 Publications</span>
+          </div>
+          
+          <div class="pub-card">
+            <h3 class="pub-title">CoSTA: Co-training Spatial-Temporal Attention for Blind Video Quality Assessment</h3>
+            <p class="pub-authors">Fengchuang Xing, Yuan-Gen Wang, Weixuan Tang, Guopu Zhu, Sam Kwong</p>
+            <p class="pub-venue">Expert Systems with Applications, Vol. 255, 2024</p>
+            <div class="pub-meta">
+              <span class="badge sci">SCI 一区 TOP</span>
+              <span class="badge">视频质量评估</span>
+              <span class="badge">时空注意力</span>
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.eswa.2024.124651" class="pub-link"><i data-lucide="link"></i> DOI Link</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <h3 class="pub-title">FRRffusion: Unveiling Authenticity with Diffusion-Based Face Retouching Reversal</h3>
+            <p class="pub-authors">Fengchuang Xing, Xiaowen Shi, Yuan-Gen Wang, Chunsheng Yang</p>
+            <p class="pub-venue">arXiv preprint arXiv:2405.07582, 2024</p>
+            <div class="pub-meta">
+              <span class="badge">扩散模型</span>
+              <span class="badge">人脸修复</span>
+              <span class="badge">预印本</span>
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.48550/arXiv.2405.07582" class="pub-link"><i data-lucide="file-text"></i> arXiv Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Awards & Projects -->
+        <div class="section-block">
+          <div class="block-header">
+            <i data-lucide="award" class="h-icon"></i>
+            <h2>奖项与荣誉</h2>
+          </div>
+          <div class="award-list">
+            <div class="award-item">
+              <div class="award-info">
+                <h4>广东省工科大赛学生实验综合技能竞赛一等奖</h4>
+                <p>获奖时间：2025年</p>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-info">
+                <h4>广州市荔湾区第三届创新创业大赛优胜奖</h4>
+                <p>获奖时间：2025年</p>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-info">
+                <h4>2025年世界职业院校技能大赛广东赛区人工智能赛道第四名</h4>
+                <p>获奖时间：2025年</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="block-header">
+            <i data-lucide="flask-conical" class="h-icon"></i>
+            <h2>科研项目</h2>
+          </div>
+          <div class="award-list">
+            <div class="award-item">
+              <div class="award-info">
+                <h4>企业合作项目：基于 diffusion-mamba 的视频图像美颜</h4>
+                <p>合作企业：深圳昊科达电子有限公司 | 经费：40万元 | 2025年</p>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-info">
+                <h4>国家级大学生创新创业计划项目</h4>
+                <p>基于深度学习的多模态姿态识别教师教学质量评估系统 | 2025年</p>
+              </div>
+            </div>
+            <div class="award-item">
+              <div class="award-info">
+                <h4>广东第二师范学院创业窝项目：De-Fit 智储箱连</h4>
+                <p>基于 STC15F2K60S2 的慢性病药物智能药箱 | 2025年</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container-custom footer-grid">
+        <div class="footer-col">
+          <img src="images/white logo.png" alt="Logo" style="height:60px;margin-bottom:20px">
+          <p>广东第二师范学院 深度视觉实验室</p>
+          <p>专注于计算机视觉与人工智能的前沿探索。</p>
+        </div>
+        <div class="footer-col">
+          <h4>联系我们</h4>
+          <p>广东第二师范学院 海珠校区</p>
+          <p>物理与信息工程学院 校众创空间</p>
+          <p>Email: xingfengchuang@gdei.edu.cn</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速链接</h4>
+          <a href="research.html">研究方向</a>
+          <a href="people.html">团队成员</a>
+          <a href="publications.html">科研成果</a>
+          <a href="news.html">新闻动态</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright © 2026 广东第二师范学院. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

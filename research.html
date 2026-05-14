@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="广东第二师范学院深度视觉实验室, 研究方向, 计算机视觉, 人工智能">
+    <meta name="description" content="广东第二师范学院深度视觉实验室研究方向介绍">
+    <title>研究方向 - 广东第二师范学院深度视觉实验室</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --primary-light: #eff6ff;
+        --accent-purple: #8b5cf6;
+        --text-main: #1f2937;
+        --text-muted: #6b7280;
+        --bg-light: #f8fafc;
+        --white: #ffffff;
+        --border: #e5e7eb;
+        --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.04);
+        --radius: 12px;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        color: var(--text-main);
+        background-color: var(--white);
+        -webkit-font-smoothing: antialiased;
+      }
+      a { text-decoration: none; transition: all 0.2s ease; }
+
+      .container-custom {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* === Header === */
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        height: 100px;
+        display: flex;
+        align-items: center;
+      }
+
+      .header-content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+      }
+
+      .header-left { display: flex; align-items: center; gap: 20px; }
+      .logo-u { height: 64px; }
+      .logo-s { height: 56px; }
+
+      .main-nav {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+      }
+
+      .main-nav a {
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--text-main);
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+      .main-nav a:hover, .main-nav a.active { color: var(--primary); }
+      .main-nav a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      /* === Sub Hero === */
+      .sub-hero {
+        background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+        padding: 80px 0 40px;
+        text-align: center;
+        position: relative;
+      }
+      .sub-hero h1 {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+      .sub-hero .ghost-text {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+        font-weight: 900;
+        color: rgba(0,0,0,0.02);
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .sub-hero p {
+        color: var(--text-muted);
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+
+      /* === Content Sections === */
+      .section { padding: 40px 0 80px; }
+      
+      .research-item {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 48px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        transition: transform 0.3s ease;
+      }
+      .research-item:hover { transform: translateY(-5px); }
+      
+      .research-item:nth-child(even) {
+        direction: rtl;
+      }
+      .research-item:nth-child(even) .research-info {
+        direction: ltr;
+      }
+
+      .research-item-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 24px;
+        width: 100%;
+      }
+
+      .research-icon-box {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex: 0 0 52px; /* 强制固定宽度，防止拉伸 */
+        font-size: 22px;
+      }
+
+      .research-title-group {
+        flex: 1;
+      }
+
+      .research-title-group h2 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+      .research-subtitle {
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .research-description {
+        color: #4b5563;
+        line-height: 1.8;
+        margin-bottom: 24px;
+        font-size: 15px;
+      }
+
+      .research-highlights {
+        background: var(--bg-light);
+        padding: 24px;
+        border-radius: 12px;
+        border-left: none; /* 去掉左边框 */
+      }
+      .research-highlights h4 {
+        font-size: 15px;
+        color: #0f172a;
+        margin-bottom: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .h-icon {
+        width: 18px;
+        height: 18px;
+        color: var(--primary);
+      }
+      .h-icon-lg {
+        width: 32px;
+        height: 32px;
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+      .research-highlights ul {
+        list-style: none;
+      }
+      .research-highlights li {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #4b5563;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.6;
+      }
+      .research-highlights li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: bold;
+      }
+
+      .research-image img {
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      }
+
+      /* Collaboration Card */
+      .collaboration-card {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: white;
+        padding: 60px;
+        border-radius: 24px;
+        text-align: center;
+        margin-top: 40px;
+      }
+      .collaboration-card h2 { font-size: 32px; margin-bottom: 24px; }
+      .collaboration-card p { font-size: 18px; color: #94a3b8; line-height: 1.8; max-width: 800px; margin: 0 auto 32px; }
+      .contact-info {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255,255,255,0.05);
+        padding: 12px 24px;
+        border-radius: 50px;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      /* Footer */
+      .main-footer {
+        background: #0f172a;
+        color: #94a3b8;
+        padding: 80px 0 40px;
+      }
+      .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+      .footer-logo img { height: 60px; margin-bottom: 20px; }
+      .footer-col h4 { color: white; margin-bottom: 24px; font-size: 16px; font-weight: 700; }
+      .footer-col p, .footer-col a { font-size: 14px; margin-bottom: 12px; display: block; color: #94a3b8; }
+      .footer-col a:hover { color: white; }
+      .footer-bottom {
+        margin-top: 60px;
+        padding-top: 32px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+        font-size: 14px;
+      }
+
+      @media (max-width: 1024px) {
+        .research-item { grid-template-columns: 1fr; gap: 32px; }
+        .research-item:nth-child(even) { direction: ltr; }
+      }
+      @media (max-width: 768px) {
+        .main-nav { display: none; }
+        .footer-grid { grid-template-columns: 1fr; }
+        .sub-hero h1 { font-size: 28px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container-custom header-content">
+        <div class="header-left">
+          <img src="images/black logo.png" alt="GDEI" class="logo-u">
+          <img src="images/sch logo.png" alt="School" class="logo-s">
+        </div>
+        <nav class="main-nav">
+          <a href="index.html">首页</a>
+          <a href="research.html" class="active">研究方向</a>
+          <a href="people.html">团队成员</a>
+          <a href="publications.html">科研成果</a>
+          <a href="news.html">新闻动态</a>
+        </nav>
+        <!-- <div class="header-right">
+          <img src="images/logo.jpg" alt="Lab" class="logo-lab">
+        </div> -->
+      </div>
+    </header>
+
+    <main>
+      <section class="sub-hero">
+        <div class="container-custom">
+          <h1>研究方向</h1>
+          <p>Research Areas</p>
+        </div>
+      </section>
+
+      <div class="container-custom section">
+        
+        <!-- 研究方向1: 视频质量评估 -->
+        <div class="research-item">
+          <div class="research-info">
+            <div class="research-item-header">
+              <div class="research-icon-box" style="background:#3b82f6"><i data-lucide="video"></i></div>
+              <div class="research-title-group">
+                <h2>视频质量评估</h2>
+                <p class="research-subtitle">Video Quality Assessment</p>
+              </div>
+            </div>
+            <p class="research-description">
+              随着互联网视频服务的爆发式增长，视频质量评估技术在流媒体优化、编码器设计和用户体验评价中扮演着至关重要的角色。我们的研究聚焦于开发先进的视频质量评估算法，包括全参考、半参考和无参考质量评价模型，以及针对压缩失真、传输错误和显示设备特性的专门评估方法。
+            </p>
+            <div class="research-highlights">
+              <h4><i data-lucide="target" class="h-icon"></i>关键研究内容</h4>
+              <ul>
+                <li><strong>无参考视频质量评估：</strong>设计基于深度学习的盲视频质量评价模型，无需原始参考视频即可准确评估视频质量</li>
+                <li><strong>感知质量建模：</strong>结合人类视觉系统特性，构建符合主观感知的视频质量指标</li>
+                <li><strong>实时质量监控：</strong>开发轻量级质量评估算法，支持流媒体服务中的实时质量监控与自适应码率调整</li>
+                <li><strong>新型编码标准评估：</strong>针对H.266/VVC、AV1等新一代视频编码标准的质量评估研究</li>
+              </ul>
+            </div>
+          </div>
+          <div class="research-image">
+            <img src="https://placehold.co/800x600/3b82f6/ffffff?text=VQA+Research" alt="Video Quality Assessment">
+          </div>
+        </div>
+
+        <!-- 研究方向2: 农业识别 -->
+        <div class="research-item">
+          <div class="research-info">
+            <div class="research-item-header">
+              <div class="research-icon-box" style="background:#10b981"><i data-lucide="sprout"></i></div>
+              <div class="research-title-group">
+                <h2>农业识别</h2>
+                <p class="research-subtitle">Agricultural Recognition</p>
+              </div>
+            </div>
+            <p class="research-description">
+              智慧农业是现代农业发展的重要方向。我们致力于开发基于计算机视觉和深度学习的农业智能识别系统，包括农作物病虫害自动识别、作物生长状态监测、产量预测等关键技术，帮助农民及时发现和处理农业生产中的问题，提高农业生产效率和质量。
+            </p>
+            <div class="research-highlights">
+              <h4><i data-lucide="target" class="h-icon"></i>关键研究内容</h4>
+              <ul>
+                <li><strong>病虫害智能识别：</strong>构建大规模农作物病虫害数据集，开发高精度的病虫害自动识别模型</li>
+                <li><strong>作物生长监测：</strong>利用无人机和固定相机采集的图像，实现作物生长状态的实时监测与分析</li>
+                <li><strong>产量预测：</strong>结合多模态数据（图像、气象、土壤等），建立精准的作物产量预测模型</li>
+                <li><strong>移动应用开发：</strong>开发面向农民的移动端农业识别应用，提供便捷的现场识别服务</li>
+              </ul>
+            </div>
+          </div>
+          <div class="research-image">
+            <img src="https://placehold.co/800x600/10b981/ffffff?text=Agricultural+Recognition" alt="Agricultural Recognition">
+          </div>
+        </div>
+
+        <!-- 研究方向3: 教师质量评估 -->
+        <div class="research-item">
+          <div class="research-info">
+            <div class="research-item-header">
+              <div class="research-icon-box" style="background:#f59e0b"><i data-lucide="graduation-cap"></i></div>
+              <div class="research-title-group">
+                <h2>教师质量评估</h2>
+                <p class="research-subtitle">Teaching Quality Assessment</p>
+              </div>
+            </div>
+            <p class="research-description">
+              教育质量是高校发展的生命线。我们运用计算机视觉、语音识别和自然语言处理等AI技术，开发智能化的教学质量评估系统，通过分析教师的教学行为、课堂互动、教学内容等多维度数据，为教学质量改进提供客观、精准的参考依据，助力师范院校提升教学水平。
+            </p>
+            <div class="research-highlights">
+              <h4><i data-lucide="target" class="h-icon"></i>关键研究内容</h4>
+              <ul>
+                <li><strong>教学行为分析：</strong>利用视频分析技术，自动识别和评估教师的教学行为模式（如板书、提问、走动等）</li>
+                <li><strong>课堂互动评估：</strong>通过分析师生互动频率、学生注意力状态等指标，评价课堂教学效果</li>
+                <li><strong>教学内容质量分析：</strong>结合NLP技术，分析教学内容的完整性、逻辑性和深度</li>
+                <li><strong>个性化改进建议：</strong>基于评估结果，为教师提供个性化的教学改进建议和培训方案</li>
+              </ul>
+            </div>
+          </div>
+          <div class="research-image">
+            <img src="https://placehold.co/800x600/f59e0b/ffffff?text=Teaching+Quality" alt="Teaching Quality">
+          </div>
+        </div>
+
+        <!-- 研究方向4: 扩散模型应用 -->
+        <div class="research-item">
+          <div class="research-info">
+            <div class="research-item-header">
+              <div class="research-icon-box" style="background:#8b5cf6"><i data-lucide="layers"></i></div>
+              <div class="research-title-group">
+                <h2>扩散模型应用</h2>
+                <p class="research-subtitle">Diffusion Model Applications</p>
+              </div>
+            </div>
+            <p class="research-description">
+              扩散模型是当前生成式AI领域的前沿技术，展现出强大的图像生成和编辑能力。我们深入研究扩散模型的原理与应用，探索其在图像生成、图像修复、风格迁移、医学影像处理等多个领域的创新应用，推动生成式AI技术在实际场景中的落地。
+            </p>
+            <div class="research-highlights">
+              <h4><i data-lucide="target" class="h-icon"></i>关键研究内容</h4>
+              <ul>
+                <li><strong>高质量图像生成：</strong>研究改进的扩散模型架构，提升生成图像的质量、多样性和可控性</li>
+                <li><strong>图像编辑与修复：</strong>开发基于扩散模型的智能图像编辑工具，支持内容感知的图像修复和局部编辑</li>
+                <li><strong>条件生成：</strong>探索文本、草图、语义图等多种条件下的可控图像生成方法</li>
+                <li><strong>领域适配与应用：</strong>将扩散模型应用于医学影像、遥感图像、工业检测等专业领域</li>
+              </ul>
+            </div>
+          </div>
+          <div class="research-image">
+            <img src="https://placehold.co/800x600/8b5cf6/ffffff?text=Diffusion+Models" alt="Diffusion Models">
+          </div>
+        </div>
+
+        <!-- 研究方向5: 人群计数 -->
+        <div class="research-item">
+          <div class="research-info">
+            <div class="research-item-header">
+              <div class="research-icon-box" style="background:#ec4899"><i data-lucide="users"></i></div>
+              <div class="research-title-group">
+                <h2>人群计数</h2>
+                <p class="research-subtitle">Crowd Counting</p>
+              </div>
+            </div>
+            <p class="research-description">
+              人群计数是公共安全、城市管理和事件组织中的关键技术。我们专注于开发鲁棒的人群计数算法，能够在各种复杂场景（如体育场馆、交通枢纽、商业中心等）中准确估计人数，并分析人群密度分布和流动模式，为公共安全预警和人群管理提供技术支持。
+            </p>
+            <div class="research-highlights">
+              <h4><i data-lucide="target" class="h-icon"></i>关键研究内容</h4>
+              <ul>
+                <li><strong>密度估计：</strong>基于深度学习的人群密度图生成方法，实现像素级的人群分布估计</li>
+                <li><strong>跨场景泛化：</strong>研究域自适应和迁移学习技术，提升模型在不同场景下的泛化能力</li>
+                <li><strong>实时计数系统：</strong>开发轻量化模型 and 优化算法，实现边缘设备上的实时人群计数</li>
+                <li><strong>异常检测：</strong>结合人群计数与行为分析，及时发现人群聚集等异常情况并预警</li>
+              </ul>
+            </div>
+          </div>
+          <div class="research-image">
+            <img src="https://placehold.co/800x600/ec4899/ffffff?text=Crowd+Counting" alt="Crowd Counting">
+          </div>
+        </div>
+
+        <!-- Collaboration Section -->
+        <div class="collaboration-card">
+          <h2><i data-lucide="handshake" class="h-icon-lg"></i>合作与资源</h2>
+          <p>
+            我们与国内外多所高校和科研机构保持密切合作。实验室配备高性能GPU服务器集群，拥有丰富的数据集资源和完善的实验平台。欢迎相关领域的研究人员和企业与我们开展学术交流与项目合作！
+          </p>
+          <div class="contact-info">
+            <i data-lucide="mail"></i>
+            <span>合作联系：<strong>andyzeng0921@outlook.com</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container-custom footer-grid">
+        <div class="footer-col">
+          <img src="images/white logo.png" alt="Logo" style="height:60px;margin-bottom:20px">
+          <p>广东第二师范学院 深度视觉实验室</p>
+          <p>专注于计算机视觉与人工智能的前沿探索。</p>
+        </div>
+        <div class="footer-col">
+          <h4>联系我们</h4>
+          <p>广东第二师范学院 海珠校区</p>
+          <p>物理与信息工程学院 校众创空间</p>
+          <p>Email: xingfengchuang@gdei.edu.cn</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速链接</h4>
+          <a href="research.html">研究方向</a>
+          <a href="people.html">团队成员</a>
+          <a href="publications.html">科研成果</a>
+          <a href="news.html">新闻动态</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright © 2026 广东第二师范学院. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
