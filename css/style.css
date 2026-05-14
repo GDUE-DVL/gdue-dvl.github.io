@@ -285,7 +285,9 @@ a{
 	padding: 5px 10px;
 }
 .container{
-	min-width: 970px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 15px;
 }
 
 /*loading more style*/
@@ -320,6 +322,144 @@ a{
 	cursor: pointer;
 }
 body{
-	overflow-x: scroll;
-    overflow-y: scroll;
+	overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ==================== 全局移动端适配 ==================== */
+@media (max-width: 900px) {
+	/* 确保所有图片不超出屏幕 */
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* 修复表格横向溢出 */
+	table {
+		max-width: 100%;
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* 增大触控目标 */
+	nav a, .btn, button, .pub-link {
+		min-height: 44px;
+		line-height: 44px;
+		padding: 0 14px;
+	}
+
+	/* 正文可读性 */
+	body {
+		font-size: 16px;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	/* 容器边距收窄 */
+	.content-section,
+	.home-container {
+		padding: 12px;
+	}
+
+	/* 卡片边距优化 */
+	.publication-card,
+	.research-item,
+	.award-item {
+		padding: 16px !important;
+		margin-bottom: 14px !important;
+		border-left-width: 4px !important;
+	}
+
+	/* 标题自适应 */
+	h1 { font-size: clamp(22px, 5vw, 32px) !important; }
+	h2 { font-size: clamp(18px, 4vw, 26px) !important; }
+	h3 { font-size: clamp(16px, 3.5vw, 22px) !important; }
+
+	/* 统计卡片网格 */
+	.stats-section {
+		grid-template-columns: repeat(2, 1fr) !important;
+		gap: 10px !important;
+	}
+	.stat-card { padding: 16px !important; }
+	.stat-number { font-size: 2em !important; }
+
+	/* 页脚 */
+	.main-footer .footer-content {
+		flex-direction: column !important;
+		text-align: center !important;
+		gap: 18px !important;
+		padding: 12px !important;
+	}
+	.main-footer .logo-university-footer {
+		max-width: 220px !important;
+	}
+
+	/* Hero区域 */
+	.hero {
+		padding: 30px 16px !important;
+	}
+	.hero .cta {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	/* 研究成果卡片 */
+	.research-icon { font-size: 2.5em !important; }
+	.research-title { font-size: 1.4em !important; }
+	.key-projects {
+		grid-template-columns: 1fr !important;
+	}
+
+	/* 论文卡片链接 */
+	.pub-links {
+		flex-direction: column;
+	}
+	.pub-link {
+		text-align: center;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* 团队成员 */
+	.media {
+		flex-direction: column !important;
+		text-align: center !important;
+	}
+	.media-left, .media-right {
+		display: block !important;
+		margin: 0 auto 12px !important;
+	}
+	.media-body { text-align: center !important; }
+
+	/* 筛选器 */
+	.filter-section {
+		flex-wrap: wrap !important;
+		gap: 8px !important;
+		padding: 12px !important;
+	}
+	.filter-btn {
+		font-size: 14px !important;
+		padding: 6px 14px !important;
+	}
+
+	/* 列表项 */
+	.list-item {
+		grid-template-columns: 1fr !important;
+		gap: 4px !important;
+	}
+
+	/* 隐藏桌面端大元素 */
+	.desktop-only { display: none !important; }
+}
+
+@media (max-width: 480px) {
+	.stats-section {
+		grid-template-columns: 1fr 1fr !important;
+		gap: 8px !important;
+	}
+	.stat-number { font-size: 1.6em !important; }
+	.page-title { padding: 20px 12px !important; }
+	.year-header { font-size: 1.4em !important; }
+	.pub-title { font-size: 1.05em !important; }
+	.pub-authors, .pub-venue { font-size: 0.9em !important; }
 }
