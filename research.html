@@ -6,656 +6,256 @@
     <meta name="keywords" content="广东第二师范学院深度视觉实验室, 研究方向, 计算机视觉, 人工智能">
     <meta name="description" content="广东第二师范学院深度视觉实验室研究方向介绍">
     <title>研究方向 - 广东第二师范学院深度视觉实验室</title>
-    
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/style.css" />
-    
-    <!-- === START: 关键样式修改 (与 index.html 同步) === -->
+
     <style>
-      /* === 全新页眉布局 (单行) === */
-      .main-header {
-        display: flex;
-        align-items: center;
-        /* 在电脑上，元素之间留出空间 */
-        justify-content: space-between; 
-        
-        /* 限制最大宽度并居中 */
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        
-        border-bottom: 1px solid #eee;
-        background-color: #fff;
-      }
-      
-      /* 1 & 2. 左侧的 Logo 组 */
-      .header-logo-cluster {
-        display: flex;
-        align-items: center;
-        gap: 18px; /* *** 缩小间距 *** */
-      }
-      .main-header .logo-university {
-        /* *** 在这里调试大小 *** */
-        height: 60px; /* *** 120px / 2 = 60px *** */
-        width: auto;
-      }
-      .main-header .logo-school {
-        /* *** 在这里调试大小 *** */
-        height: 53px; /* *** 105px / 2 = 52.5px *** */
-        width: auto;
-      }
+      /* === 研究方向专属 === */
 
-      /* 3. 中间的导航链接 */
-      .main-header nav {
-        display: flex; /* 电脑上显示 */
-        justify-content: center;
-        gap: 16px;
+      /* 方向块 — 左侧色条 + 图标在标题左 */
+      .research-block {
+        padding: 32px 0; border-bottom: 1px solid var(--border);
       }
-      .main-header nav a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 8px 14px;
-        border-radius: 6px;
-      }
-      .main-header nav a:hover,
-      .main-header nav a.active { /* *** 新增 .active 状态 *** */
-        color: #007bff;
-        background-color: #f4f4f4;
-      }
-      
-      /* 4. 右侧的 Lab Logo */
-      .main-header .logo-lab-link {
-        display: inline-block;
-        line-height: 1;
-      }
-      .main-header .logo-lab {
-        /* *** 在这里调试大小 *** */
-        height: 75px; /* *** 150px / 2 = 75px *** */
-        width: auto;
-      }
+      .research-block:last-of-type { border-bottom: none; }
 
-      /* 5. 移动端菜单按钮 */
-      .menu-toggle {
-        display: none; /* 电脑上隐藏 */
-        background: #fff;
-        border: 1px solid #ddd;
-        padding: 8px 12px;
-        border-radius: 6px;
-        cursor: pointer;
+      .research-head {
+        display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px;
       }
-      .menu-toggle:focus { outline: 2px solid #0d6efd; }
-      
-      /* === 响应式设计：手机上 === */
-      @media (max-width: 900px) {
-        .main-header {
-            /* 在手机上，只显示 Lab Logo (左) 和 汉堡按钮 (右) */
-            justify-content: space-between;
-        }
-        
-        /* 隐藏学校/学院 logo 和电脑版导航 */
-        .main-header .header-logo-cluster,
-        .main-header nav {
-            display: none;
-        }
-        
-        .menu-toggle {
-            display: block; /* 显示汉堡按钮 */
-        }
-        
-        .main-header .logo-lab {
-            height: 40px; /* *** 手机上 logo 保持 40px *** */
-        }
-        
-        /* 当汉堡菜单被点击时，显示导航 */
-        .main-header.nav-open {
-            flex-wrap: wrap; /* 允许换行 */
-        }
-        .main-header.nav-open nav {
-            display: flex;
-            flex-direction: column; /* 垂直堆叠 */
-            width: 100%; /* 占满整行 */
-            align-items: center;
-            gap: 8px;
-            padding-top: 15px; /* 离顶部 logo 有点距离 */
-            order: 3; /* 确保它在 logo 和按钮下面 */
-        }
-      }
-      /* === End: 全新页眉布局 === */
+      .research-head .icon { font-size: 18px; }
+      .research-head h2 { font-size: 20px; margin: 0; }
 
-      /* === 全局样式 === */
-      :root {
-        --primary-color: #007bff;
-        --secondary-color: #6c757d;
-        --text-color: #333;
-        --light-gray: #f8f9fa;
-        --border-color: #e0e0e0;
-        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        margin: 0;
-        padding: 0;
-      }
-      
-      /* === 页面标题 === */
-      .page-title {
-        background: #f8f9fa;
-        border-bottom: 1px solid #eee;
-        text-align: center;
-        padding: 30px 20px;
-        margin-bottom: 30px;
-      }
-      
-      .page-title h1 {
-        margin: 0;
-        font-size: 26px;
-        color: #222;
-      }
-      .page-title p {
-        margin: 8px 0 0 0;
-        color: #666;
-      }
-
-      /* === 主体内容 === */
-      .content-section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      /* === 研究方向卡片 === */
-      .research-item {
-        background: white;
-        border-radius: 15px;
-        padding: 40px;
-        margin-bottom: 40px;
-        box-shadow: var(--shadow);
-        transition: all 0.3s ease;
-        border-left: 5px solid var(--primary-color);
-      }
-      
-      .research-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      }
-      
-      .research-icon {
-        font-size: 4em;
-        margin-bottom: 20px;
-        display: inline-block;
-      }
-      
-      .research-title {
-        font-size: 2em;
-        color: var(--primary-color);
-        margin-bottom: 15px;
-        font-weight: 700;
-      }
-      
       .research-subtitle {
-        font-size: 1.1em;
-        color: var(--secondary-color);
-        margin-bottom: 20px;
-        font-style: italic;
+        font-size: 14px; color: var(--text-muted); margin: 0 0 16px; font-style: italic;
       }
-      
-      .research-description {
-        font-size: 1.05em;
-        line-height: 1.8;
-        margin-bottom: 20px;
-        color: #555;
+      .research-desc {
+        font-size: 15px; line-height: 1.75; color: var(--text-body); margin-bottom: 20px; max-width: 760px;
       }
-      
-      .research-highlights {
-        background: var(--light-gray);
-        padding: 20px;
-        border-radius: 10px;
-        margin: 20px 0;
+
+      /* 子要点列表 */
+      .research-points {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+        padding: 16px 20px; background: var(--bg-page); border-radius: 6px;
+        margin-bottom: 16px;
       }
-      
-      .research-highlights h4 {
-        color: var(--primary-color);
-        margin-bottom: 15px;
-        font-size: 1.2em;
+      .research-points .point {
+        font-size: 14px; line-height: 1.6; color: var(--text-body);
+        padding-left: 14px; position: relative;
       }
-      
-      .research-highlights ul {
-        margin: 0;
-        padding-left: 25px;
+      .research-points .point::before {
+        content: ''; position: absolute; left: 0; top: 9px;
+        width: 5px; height: 5px; border-radius: 50%; background: var(--nav-active);
       }
-      
-      .research-highlights li {
-        margin-bottom: 10px;
-        line-height: 1.6;
+
+      /* 项目标签 */
+      .project-tags {
+        display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
       }
-      
+      .project-tag {
+        font-size: 13px; padding: 6px 14px; border-radius: 4px;
+        background: var(--bg-card); border: 1px solid var(--border); color: var(--text-body);
+      }
+
+      /* 协作区 — 浅灰背景，不用渐变 */
+      .collab-section {
+        margin-top: 48px; padding: 36px 32px;
+        background: var(--primary-light); border-radius: 6px;
+        border-left: 3px solid var(--nav-active);
+      }
+      .collab-section h2 { font-size: 18px; margin: 0 0 12px; }
+      .collab-section p  { font-size: 14px; color: var(--text-body); line-height: 1.7; margin: 0; max-width: 700px; }
+      .collab-section .contact { margin-top: 12px; font-weight: 600; color: var(--primary); }
+
+      /* 配图（可选） */
       .research-image {
-        width: 100%;
-        border-radius: 10px;
-        margin: 20px 0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
-      
-      .key-projects {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin: 20px 0;
-      }
-      
-      .project-box {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        border: 2px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-      
-      .project-box:hover {
-        border-color: var(--primary-color);
-        box-shadow: var(--shadow);
-      }
-      
-      .project-box h5 {
-        color: var(--primary-color);
-        margin-bottom: 10px;
-        font-size: 1.1em;
+        width: 100%; max-width: 600px; border-radius: 4px;
+        margin: 12px 0 0; border: 1px solid var(--border);
       }
 
-      /* === 协作与资源 === */
-      .collaboration-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 40px;
-        border-radius: 15px;
-        margin: 60px 0 40px;
-        text-align: center;
-      }
-      
-      .collaboration-section h2 {
-        color: white;
-        margin-bottom: 20px;
-      }
-      
-      .collaboration-section p {
-        font-size: 1.1em;
-        line-height: 1.8;
-      }
-
-      /* === 页脚样式 === */
-      .main-footer {
-        background-color: #333;
-        color: #ccc;
-        padding: 20px 0;
-        margin-top: 60px;
-      }
-      
-      .main-footer .footer-content {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto 20px;
-        padding: 20px;
-        flex-wrap: wrap;
-        gap: 30px;
-      }
-      
-      .main-footer .logo-university-footer {
-        width: 100%;
-        max-width: clamp(200px, 32vw, 380px);
-        height: auto;
-      }
-      
-      .main-footer address {
-        font-size: 15px;
-        font-style: normal;
-        line-height: 1.8;
-      }
-      
-      .main-footer a {
-        color: #fff;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-      
-      .main-footer a:hover {
-        color: #5dade2;
-        text-decoration: underline;
-      }
-      
-      .footer-bottom {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: #95a5a6;
-        font-size: 14px;
-      }
-      
-      /* === 响应式设计 === */
       @media (max-width: 768px) {
-        .research-item {
-          padding: 25px;
-        }
-        
-        .key-projects {
-          grid-template-columns: 1fr;
-        }
-        
-        .main-footer .footer-content {
-          flex-direction: column;
-          text-align: center;
-        }
+        .research-points { grid-template-columns: 1fr; }
+        .research-block { padding: 24px 0; }
+        .collab-section { padding: 24px 20px; }
       }
-      @media (max-width: 900px) {
-        /* (媒体查询里已包含 .menu-toggle 和 nav-open 的样式) */
-      }
+    
+      .watermark::before { opacity: 0.07; }
     </style>
   </head>
   <body>
-    <a class="skip-link" href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">跳到主要内容</a>
-    
-    <!-- === START: 全新的页眉 (Header) === -->
-    <header class="main-header">
-        
-        <!-- 1 & 2. 左侧的 Logo 组 -->
-        <div class="header-logo-cluster">
-            <!-- 1. 学校 Logo (黑字, png) -->
-            <img src="images/black logo.png" 
-                 alt="广东第二师范学院" 
-                 class="logo-university"
-                 onerror="this.src='https://placehold.co/320x80/f8f8f8/666?text=University+Logo'; this.onerror=null;">
-                 
-            <!-- 2. 学院 Logo (sch logo) -->
-            <img src="images/sch logo.png" 
-                 alt="学院Logo" 
-                 class="logo-school"
-                 onerror="this.src='https://placehold.co/140x80/f8f8f8/666?text=School+Logo'; this.onerror=null;">
-        </div>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-        <!-- 3. 中间的导航链接 -->
+    <header class="main-header">
         <nav aria-label="主导航">
             <a href="index.html">主页</a>
-            <!-- *** 修改：给“研究方向”添加 active 类 *** -->
             <a href="research.html" class="active" aria-current="page">研究方向</a>
             <a href="people.html">团队成员</a>
             <a href="publications.html">科研成果</a>
             <a href="news.html">新闻动态</a>
         </nav>
-
-        <!-- 4. 右侧的 Lab Logo (jpg) -->
-        <a href="index.html" class="logo-lab-link">
-          <img src="images/logo.jpg" 
-               alt="实验室Logo" 
-               class="logo-lab"
-               onerror="this.src='https://placehold.co/200x100/f8f8f8/666?text=Lab+Logo'; this.onerror=null;">
-        </a>
-        
-        <!-- 5. 移动端菜单按钮 -->
         <button class="menu-toggle" aria-label="展开或收起导航">☰</button>
-
     </header>
-    <!-- === END: 全新的页眉 === -->
 
-    <!-- === 页面标题 === -->
-    <section class="page-title">
-      <h1 style="margin:0;font-size:26px;color:#222;">🔬 研究方向</h1>
-      <p style="margin:8px 0 0 0;color:#666;">Research Areas</p>
+    <section class="page-title watermark">
+      <h1>研究方向</h1>
+      <p>Research Areas</p>
     </section>
 
-    <!-- === 主体内容 === -->
     <div class="content-section" id="main-content">
-      
-      <!-- 研究方向1: 视频质量评估 -->
-      <div class="research-item">
-        <div class="research-icon">📹</div>
-        <h2 class="research-title">视频质量评估 (Video Quality Assessment)</h2>
-        <p class="research-subtitle">研究视频编码、传输和显示过程中的质量评价方法</p>
-        
-        <p class="research-description">
+
+      <!-- 方向 1：视频质量评估 -->
+      <div class="research-block">
+        <div class="research-head">
+          <span class="icon">📹</span>
+          <h2>视频质量评估</h2>
+        </div>
+        <p class="research-subtitle">Video Quality Assessment — 研究视频编码、传输和显示过程中的质量评价方法</p>
+        <p class="research-desc">
           随着互联网视频服务的爆发式增长，视频质量评估技术在流媒体优化、编码器设计和用户体验评价中扮演着至关重要的角色。我们的研究聚焦于开发先进的视频质量评估算法，包括全参考、半参考和无参考质量评价模型，以及针对压缩失真、传输错误和显示设备特性的专门评估方法。
         </p>
-        
-        <img src="https://placehold.co/1000x400/667eea/ffffff?text=Video+Quality+Assessment+Research" 
-             alt="视频质量评估研究" 
-             class="research-image">
-        
-        <div class="research-highlights">
-          <h4>🎯 关键研究内容：</h4>
-          <ul>
-            <li><strong>无参考视频质量评估：</strong>设计基于深度学习的盲视频质量评价模型，无需原始参考视频即可准确评估视频质量</li>
-            <li><strong>感知质量建模：</strong>结合人类视觉系统特性，构建符合主观感知的视频质量指标</li>
-            <li><strong>实时质量监控：</strong>开发轻量级质量评估算法，支持流媒体服务中的实时质量监控与自适应码率调整</li>
-            <li><strong>新型编码标准评估：</strong>针对H.266/VVC、AV1等新一代视频编码标准的质量评估研究</li>
-          </ul>
+        <div class="research-points">
+          <span class="point">设计基于深度学习的盲视频质量评价模型</span>
+          <span class="point">结合人类视觉系统特性构建感知质量指标</span>
+          <span class="point">开发轻量级算法支持实时质量监控</span>
+          <span class="point">针对 H.266/VVC、AV1 等新编码标准的评估</span>
         </div>
-        
-        <div class="key-projects">
-          <div class="project-box">
-            <h5>📊 项目：基于深度学习的无参考视频质量评估</h5>
-            <p>国家自然科学基金资助项目</p>
-          </div>
-          <div class="project-box">
-            <h5>📊 项目：5G流媒体感知质量优化</h5>
-            <p>广东省科技计划项目</p>
-          </div>
+        <div class="project-tags">
+          <span class="project-tag">基于深度学习的无参考视频质量评估 · 国自然</span>
+          <span class="project-tag">5G 流媒体感知质量优化 · 广东省科技计划</span>
         </div>
       </div>
 
-      <!-- 研究方向2: 农业识别 -->
-      <div class="research-item">
-        <div class="research-icon">🌾</div>
-        <h2 class="research-title">农业识别 (Agricultural Recognition)</h2>
-        <p class="research-subtitle">基于计算机视觉的农作物病虫害识别与智能农业应用</p>
-        
-        <p class="research-description">
+      <!-- 方向 2：农业识别 -->
+      <div class="research-block">
+        <div class="research-head">
+          <span class="icon">🌾</span>
+          <h2>农业识别</h2>
+        </div>
+        <p class="research-subtitle">Agricultural Recognition — 基于计算机视觉的农作物病虫害识别与智能农业应用</p>
+        <p class="research-desc">
           智慧农业是现代农业发展的重要方向。我们致力于开发基于计算机视觉和深度学习的农业智能识别系统，包括农作物病虫害自动识别、作物生长状态监测、产量预测等关键技术，帮助农民及时发现和处理农业生产中的问题，提高农业生产效率和质量。
         </p>
-        
-        <img src="https://placehold.co/1000x400/28a745/ffffff?text=Agricultural+Recognition+System" 
-             alt="农业识别系统" 
-             class="research-image">
-        
-        <div class="research-highlights">
-          <h4>🎯 关键研究内容：</h4>
-          <ul>
-            <li><strong>病虫害智能识别：</strong>构建大规模农作物病虫害数据集，开发高精度的病虫害自动识别模型</li>
-            <li><strong>作物生长监测：</strong>利用无人机和固定相机采集的图像，实现作物生长状态的实时监测与分析</li>
-            <li><strong>产量预测：</strong>结合多模态数据（图像、气象、土壤等），建立精准的作物产量预测模型</li>
-            <li><strong>移动应用开发：</strong>开发面向农民的移动端农业识别应用，提供便捷的现场识别服务</li>
-          </ul>
+        <div class="research-points">
+          <span class="point">构建大规模农作物病虫害数据集与识别模型</span>
+          <span class="point">利用无人机和固定相机实现作物生长监测</span>
+          <span class="point">结合多模态数据建立精准产量预测模型</span>
+          <span class="point">开发面向农民的移动端农业识别应用</span>
         </div>
-        
-        <div class="key-projects">
-          <div class="project-box">
-            <h5>🌱 项目：岭南特色农作物病虫害智能识别系统</h5>
-            <p>广东省重点研发计划</p>
-          </div>
-          <div class="project-box">
-            <h5>🌱 项目：基于无人机的农田作物监测平台</h5>
-            <p>企业合作项目</p>
-          </div>
+        <div class="project-tags">
+          <span class="project-tag">岭南特色农作物病虫害智能识别 · 广东省重点研发</span>
+          <span class="project-tag">基于无人机的农田作物监测平台 · 企业合作</span>
         </div>
       </div>
 
-      <!-- 研究方向3: 教师质量评估 -->
-      <div class="research-item">
-        <div class="research-icon">👨‍🏫</div>
-        <h2 class="research-title">教师质量评估 (Teaching Quality Assessment)</h2>
-        <p class="research-subtitle">利用AI技术辅助教学质量评估与教育改进</p>
-        
-        <p class="research-description">
-          教育质量是高校发展的生命线。我们运用计算机视觉、语音识别和自然语言处理等AI技术，开发智能化的教学质量评估系统，通过分析教师的教学行为、课堂互动、教学内容等多维度数据，为教学质量改进提供客观、精准的参考依据，助力师范院校提升教学水平。
+      <!-- 方向 3：教师质量评估 -->
+      <div class="research-block">
+        <div class="research-head">
+          <span class="icon">👨‍🏫</span>
+          <h2>教师质量评估</h2>
+        </div>
+        <p class="research-subtitle">Teaching Quality Assessment — 利用 AI 技术辅助教学质量评估与教育改进</p>
+        <p class="research-desc">
+          教育质量是高校发展的生命线。我们运用计算机视觉、语音识别和自然语言处理等 AI 技术，开发智能化的教学质量评估系统，通过分析教师的教学行为、课堂互动、教学内容等多维度数据，为教学质量改进提供客观、精准的参考依据。
         </p>
-        
-        <img src="https://placehold.co/1000x400/ff6b6b/ffffff?text=Teaching+Quality+Assessment+Platform" 
-             alt="教学质量评估平台" 
-             class="research-image">
-        
-        <div class="research-highlights">
-          <h4>🎯 关键研究内容：</h4>
-          <ul>
-            <li><strong>教学行为分析：</strong>利用视频分析技术，自动识别和评估教师的教学行为模式（如板书、提问、走动等）</li>
-            <li><strong>课堂互动评估：</strong>通过分析师生互动频率、学生注意力状态等指标，评价课堂教学效果</li>
-            <li><strong>教学内容质量分析：</strong>结合NLP技术，分析教学内容的完整性、逻辑性和深度</li>
-            <li><strong>个性化改进建议：</strong>基于评估结果，为教师提供个性化的教学改进建议和培训方案</li>
-          </ul>
+        <div class="research-points">
+          <span class="point">利用视频分析自动识别教师教学行为模式</span>
+          <span class="point">分析师生互动频率与学生注意力状态</span>
+          <span class="point">结合 NLP 技术分析内容完整性与深度</span>
+          <span class="point">基于评估结果提供个性化改进建议</span>
         </div>
-        
-        <div class="key-projects">
-          <div class="project-box">
-            <h5>📚 项目：智能化教学质量评估系统</h5>
-            <p>广东省教育科学规划课题</p>
-          </div>
-          <div class="project-box">
-            <h5>📚 项目：师范生教学技能智能评价平台</h5>
-            <p>学校教学改革项目</p>
-          </div>
+        <div class="project-tags">
+          <span class="project-tag">智能化教学质量评估系统 · 广东省教育科学规划</span>
+          <span class="project-tag">师范生教学技能智能评价平台 · 校教改</span>
         </div>
       </div>
 
-      <!-- 研究方向4: 扩散模型应用 -->
-      <div class="research-item">
-        <div class="research-icon">🎨</div>
-        <h2 class="research-title">扩散模型应用 (Diffusion Model Applications)</h2>
-        <p class="research-subtitle">生成式AI模型在图像生成、编辑等领域的创新应用</p>
-        
-        <p class="research-description">
-          扩散模型是当前生成式AI领域的前沿技术，展现出强大的图像生成和编辑能力。我们深入研究扩散模型的原理与应用，探索其在图像生成、图像修复、风格迁移、医学影像处理等多个领域的创新应用，推动生成式AI技术在实际场景中的落地。
+      <!-- 方向 4：扩散模型应用 -->
+      <div class="research-block">
+        <div class="research-head">
+          <span class="icon">🎨</span>
+          <h2>扩散模型应用</h2>
+        </div>
+        <p class="research-subtitle">Diffusion Model Applications — 生成式 AI 模型在图像生成、编辑等领域的创新应用</p>
+        <p class="research-desc">
+          扩散模型是当前生成式 AI 领域的前沿技术，展现出强大的图像生成和编辑能力。我们深入研究扩散模型的原理与应用，探索其在图像生成、图像修复、风格迁移、医学影像处理等多个领域的创新应用，推动生成式 AI 技术在实际场景中的落地。
         </p>
-        
-        <img src="https://placehold.co/1000x400/9b59b6/ffffff?text=Diffusion+Model+Applications" 
-             alt="扩散模型应用" 
-             class="research-image">
-        
-        <div class="research-highlights">
-          <h4>🎯 关键研究内容：</h4>
-          <ul>
-            <li><strong>高质量图像生成：</strong>研究改进的扩散模型架构，提升生成图像的质量、多样性和可控性</li>
-            <li><strong>图像编辑与修复：</strong>开发基于扩散模型的智能图像编辑工具，支持内容感知的图像修复和局部编辑</li>
-            <li><strong>条件生成：</strong>探索文本、草图、语义图等多种条件下的可控图像生成方法</li>
-            <li><strong>领域适配与应用：</strong>将扩散模型应用于医学影像、遥感图像、工业检测等专业领域</li>
-          </ul>
+        <div class="research-points">
+          <span class="point">研究改进的扩散模型架构提升生成质量与可控性</span>
+          <span class="point">开发内容感知的图像修复和局部编辑工具</span>
+          <span class="point">探索多条件可控图像生成方法</span>
+          <span class="point">将扩散模型应用于医学影像与遥感图像</span>
         </div>
-        
-        <div class="key-projects">
-          <div class="project-box">
-            <h5>🎨 项目：基于扩散模型的智能图像编辑系统</h5>
-            <p>国家自然科学基金青年项目</p>
-          </div>
-          <div class="project-box">
-            <h5>🎨 项目：医学影像增强与合成</h5>
-            <p>医院合作项目</p>
-          </div>
+        <div class="project-tags">
+          <span class="project-tag">基于扩散模型的智能图像编辑系统 · 国自然青年</span>
+          <span class="project-tag">医学影像增强与合成 · 医院合作</span>
         </div>
       </div>
 
-      <!-- 研究方向5: 人群计数 -->
-      <div class="research-item">
-        <div class="research-icon">👥</div>
-        <h2 class="research-title">人群计数 (Crowd Counting)</h2>
-        <p class="research-subtitle">密集人群场景下的人数统计与行为分析技术</p>
-        
-        <p class="research-description">
-          人群计数是公共安全、城市管理和事件组织中的关键技术。我们专注于开发鲁棒的人群计数算法，能够在各种复杂场景（如体育场馆、交通枢纽、商业中心等）中准确估计人数，并分析人群密度分布和流动模式，为公共安全预警和人群管理提供技术支持。
+      <!-- 方向 5：人群计数 -->
+      <div class="research-block">
+        <div class="research-head">
+          <span class="icon">👥</span>
+          <h2>人群计数</h2>
+        </div>
+        <p class="research-subtitle">Crowd Counting — 密集人群场景下的人数统计与行为分析技术</p>
+        <p class="research-desc">
+          人群计数是公共安全、城市管理和事件组织中的关键技术。我们专注于开发鲁棒的人群计数算法，能够在各种复杂场景中准确估计人数，并分析人群密度分布和流动模式，为公共安全预警和人群管理提供技术支持。
         </p>
-        
-        <img src="https://placehold.co/1000x400/3498db/ffffff?text=Crowd+Counting+Technology" 
-             alt="人群计数技术" 
-             class="research-image">
-        
-        <div class="research-highlights">
-          <h4>🎯 关键研究内容：</h4>
-          <ul>
-            <li><strong>密度估计：</strong>基于深度学习的人群密度图生成方法，实现像素级的人群分布估计</li>
-            <li><strong>跨场景泛化：</strong>研究域自适应和迁移学习技术，提升模型在不同场景下的泛化能力</li>
-            <li><strong>实时计数系统：</strong>开发轻量化模型和优化算法，实现边缘设备上的实时人群计数</li>
-            <li><strong>异常检测：</strong>结合人群计数与行为分析，及时发现人群聚集等异常情况并预警</li>
-          </ul>
+        <div class="research-points">
+          <span class="point">基于深度学习实现像素级人群分布估计</span>
+          <span class="point">研究域自适应与迁移学习提升跨场景泛化</span>
+          <span class="point">开发轻量化模型实现边缘设备实时计数</span>
+          <span class="point">结合行为分析及时发现人群异常并预警</span>
         </div>
-        
-        <div class="key-projects">
-          <div class="project-box">
-            <h5>👥 项目：智能视频监控中的人群计数与预警</h5>
-            <p>公安部门合作项目</p>
-          </div>
-          <div class="project-box">
-            <h5>👥 项目：大型活动人群监测系统</h5>
-            <p>企业横向课题</p>
-          </div>
+        <div class="project-tags">
+          <span class="project-tag">智能视频监控中的人群计数与预警 · 公安合作</span>
+          <span class="project-tag">大型活动人群监测系统 · 企业横向课题</span>
         </div>
       </div>
 
-      <!-- 协作与资源 -->
-      <div class="collaboration-section">
-        <h2>🤝 合作与资源</h2>
+      <!-- 协作 -->
+      <div class="collab-section">
+        <h2>合作与资源</h2>
         <p>
-          我们与国内外多所高校和科研机构保持密切合作，包括清华大学、中山大学、香港中文大学等知名学府。<br>
-          实验室配备高性能GPU服务器集群，拥有丰富的数据集资源和完善的实验平台。<br>
-          欢迎相关领域的研究人员和企业与我们开展学术交流与项目合作！
+          我们与国内外多所高校和科研机构保持密切合作，包括清华大学、中山大学、香港中文大学等。实验室配备高性能 GPU 服务器集群，拥有丰富的数据集资源和完善的实验平台。欢迎相关领域的研究人员和企业与我们开展学术交流与项目合作。
         </p>
-        <p style="margin-top: 20px;">
-          <strong>合作联系：</strong> lab@gdei.edu.cn
-        </p>
+        <p class="contact">合作联系：xingfengchuang@gdei.edu.cn</p>
       </div>
-      
+
     </div>
 
-    <!-- === 页脚 === -->
     <footer class="main-footer">
         <div class="footer-content">
-            <div>
-              <img src="images/white logo.png" 
-                   alt="广东第二师范学院" 
-                   class="logo-university-footer"
-                   onerror="this.src='https://placehold.co/350x60/555/ccc?text=University+Logo'; this.onerror=null;">
-            </div>
-            
+            <img src="images/white logo.png" alt="广东第二师范学院" class="logo-university-footer"
+                 onerror="this.src='https://placehold.co/350x60/555/ccc?text=University+Logo'; this.onerror=null;">
             <address>
-              <strong>📍 联系地址</strong><br>
+              <strong style="color: var(--footer-text);">联系地址</strong><br>
               广东第二师范学院 海珠校区<br>
               物理与信息工程学院<br>
               深度视觉实验室
             </address>
-            
             <address>
-              <strong>📧 联系方式</strong><br>
-              Email: xingfengchuang@gdei.edu.cn<br>
+              <strong style="color: var(--footer-text);">联系方式</strong><br>
+              xingfengchuang@gdei.edu.cn<br>
               <a href="https://www.gdei.edu.cn/" target="_blank">学校官网</a>
             </address>
         </div>
         <div class="footer-bottom">
-          Copyright © <span id="copyright-year">2025</span> 深度视觉实验室 | 
+          Copyright &copy; <span id="copyright-year">2025</span> 深度视觉实验室 ·
           <a href="https://www.gdei.edu.cn/" target="_blank">广东第二师范学院</a>
         </div>
     </footer>
-    
+
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      try {
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
-      } catch (e) {
-        console.error("无法自动更新年份:", e);
-      }
+    <script src="js/common.js?v=footer-reveal"></script>
+    <script>
+      try { document.getElementById('copyright-year').textContent = new Date().getFullYear(); } catch (e) {}
       (function () {
-        try {
-          var toggle = document.querySelector('.main-header .menu-toggle');
-          var header = document.querySelector('.main-header');
-          if (toggle && header) {
-            toggle.addEventListener('click', function () {
-              header.classList.toggle('nav-open');
-            });
-          }
-        } catch (e) { console.error(e); }
+        var t = document.querySelector('.main-header .menu-toggle');
+        var h = document.querySelector('.main-header');
+        if (t && h) t.addEventListener('click', function () { h.classList.toggle('nav-open'); });
       })();
     </script>
-    
   </body>
 </html>

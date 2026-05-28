@@ -1,557 +1,336 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="广东第二师范学院深度视觉实验室, 深度视觉, 计算机视觉, 人工智能, 视频质量评估, 农业识别, 教师质量评估, 扩散模型, 人群计数">
     <meta name="description" content="广东第二师范学院深度视觉实验室（Deep Vision Lab @ GDEI）。专注于计算机视觉与人工智能，包括视频质量评估、农业识别、教师质量评估、扩散模型与人群计数等方向。">
     <title>广东第二师范学院深度视觉实验室</title>
-    
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/viewer.css" />
-    
-    <!-- === START: 关键样式修改 === -->
+
     <style>
-      /* === 全新页眉布局 (单行) === */
-      .main-header {
-        display: flex;
-        align-items: center;
-        /* 在电脑上，元素之间留出空间 */
-        justify-content: space-between; 
-        
-        /* 限制最大宽度并居中 */
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        
-        border-bottom: 1px solid #eee;
-        background-color: #fff;
-      }
-      
-      /* 1 & 2. 左侧的 Logo 组 */
-      .header-logo-cluster {
-        display: flex;
-        align-items: center;
-        gap: 18px; 
-      }
-      .main-header .logo-university {
-        /* *** 保持 1.5 倍大小 *** */
-        height: 60px; 
-        width: auto;
-      }
-      .main-header .logo-school {
-        /* *** 保持 1.5 倍大小 *** */
-        height: 53px; 
-        width: auto;
-      }
-
-      /* 3. 中间的导航链接 */
-      .main-header nav {
-        display: flex; /* 电脑上显示 */
-        justify-content: center;
-        gap: 16px;
-      }
-      .main-header nav a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 8px 14px;
-        border-radius: 6px;
-      }
-      .main-header nav a:hover {
-        color: #007bff;
-        background-color: #f4f4f4;
-      }
-      
-      /* 4. 右侧的 Lab Logo */
-      .main-header .logo-lab-link {
-        display: inline-block;
-        line-height: 1;
-      }
-      .main-header .logo-lab {
-        /* *** 在这里调试大小 *** */
-        height: 75px;
-        width: auto;
-      }
-
-      /* 5. 移动端菜单按钮 */
-      .menu-toggle {
-        display: none; /* 电脑上隐藏 */
-        background: #fff;
-        border: 1px solid #ddd;
-        padding: 8px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-      .menu-toggle:focus { outline: 2px solid #0d6efd; }
-      
-      /* === 响应式设计：手机上 === */
-      @media (max-width: 900px) {
-        .main-header {
-            /* 在手机上，只显示 Lab Logo (左) 和 汉堡按钮 (右) */
-            justify-content: space-between;
-        }
-        
-        /* 隐藏学校/学院 logo 和电脑版导航 */
-        .main-header .header-logo-cluster,
-        .main-header nav {
-            display: none;
-        }
-        
-        .menu-toggle {
-            display: block; /* 显示汉堡按钮 */
-        }
-        
-        .main-header .logo-lab {
-            height: 40px; /* *** 手机上 logo 保持 40px *** */
-        }
-        
-        /* 当汉堡菜单被点击时，显示导航 */
-        .main-header.nav-open {
-            flex-wrap: wrap; /* 允许换行 */
-        }
-        .main-header.nav-open nav {
-            display: flex;
-            flex-direction: column; /* 垂直堆叠 */
-            width: 100%; /* 占满整行 */
-            align-items: center;
-            gap: 8px;
-            padding-top: 15px; /* 离顶部 logo 有点距离 */
-            order: 3; /* 确保它在 logo 和按钮下面 */
-        }
-      }
-      /* === End: 全新页眉布局 === */
-
-      /* 页脚样式（自适应Logo） */
-      .main-footer {
-        background-color: #333;
-        color: #ccc;
-        padding: 20px 0;
-      }
-      .main-footer .footer-content {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-      .main-footer .logo-university-footer {
-        width: 100%;
-        max-width: clamp(200px, 32vw, 380px);
-        height: auto;
-      }
-      .main-footer address {
-        font-size: 14px;
-        font-style: normal;
-      }
-      .main-footer a {
-        color: #fff;
-        text-decoration: none;
-      }
-      .main-footer a:hover {
-        text-decoration: underline;
-      }
-
-      /* === 首页：Hero 与模块（参考清华/北大/浙大极简风） === */
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #333;
-      }
-      .skip-link {
-        position: absolute;
-        left: -9999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-      }
-      .skip-link:focus {
-        left: 12px;
-        top: 8px;
-        width: auto;
-        height: auto;
-        background: #0d6efd;
-        color: #fff;
-        padding: 8px 12px;
-        border-radius: 6px;
-        z-index: 1001;
-        text-decoration: none;
-      }
-      
+      /* === 首页专属 === */
       .hero {
-        background: #f8f9fa;
-        padding: 60px 20px;
-        text-align: center;
-        border-bottom: 1px solid #eee;
+        padding: 64px 20px 48px; text-align: center;
+        background: transparent;
       }
-      .hero h1 {
-        font-size: clamp(28px, 4vw, 40px);
-        margin: 0 0 10px 0;
-        color: #222;
-      }
-      .hero p {
-        color: #666;
-        font-size: clamp(14px, 2.2vw, 18px);
-        margin: 0 0 22px 0;
-      }
-      .hero .cta {
-        display: inline-flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .btn {
-        display: inline-block;
-        padding: 10px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        border: 2px solid transparent;
-      }
-      .btn-primary {
-        background: #007bff;
-        color: #fff;
-      }
-      .btn-primary:hover {
-        background: #0069d9;
-        transform: translateY(-1px);
-      }
-      .btn-outline {
-        background: #fff;
-        color: #007bff;
-        border-color: #007bff;
-      }
-      .btn-outline:hover {
-        background: #007bff;
-        color: #fff;
-        transform: translateY(-1px);
+      .hero h1 { font-size: clamp(26px, 4.5vw, 36px); margin-bottom: 8px; }
+      .hero p { font-size: clamp(14px, 2vw, 17px); color: var(--text-muted); margin-bottom: 24px; }
+      .hero .cta { display: inline-flex; gap: 12px; flex-wrap: wrap; }
+
+      /* 全页水印 Logo */
+      .page-watermark {
+        position: fixed; top: 50%; left: 50%; z-index: 0;
+        width: 900px; height: 300px; pointer-events: none;
+        background: url('images/black logo.png') center/contain no-repeat;
+        opacity: 0.06;
+        transform: translate(-50%, -50%);
+        transition: transform 0.05s linear;
       }
 
-      .home-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 24px 20px 0;
-        color: #555;
-      }
-      .home-section {
-        padding: 26px 0;
-        border-bottom: 1px solid #eee;
-      }
-      .home-section:last-of-type {
-        border-bottom: none;
-      }
-      .section-title {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 16px;
-      }
-      .section-title h2 {
-        font-size: 22px;
-        color: #222;
-        margin: 0;
-      }
-      .section-title a {
-        color: #007bff;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-      }
-      .section-title a:hover { text-decoration: underline; }
+      .home-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 40px; position: relative; z-index: 1; }
 
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+      /* 简介双栏 — 不用卡片 */
+      .about-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+        padding: 32px 0; border-bottom: 1px solid var(--border);
       }
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-      @media (max-width: 900px) {
-        .grid-3, .grid-2 { grid-template-columns: 1fr; }
-      }
-      .home-card {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 12px;
-        padding: 18px;
-        transition: box-shadow 0.2s ease, transform 0.2s ease;
-      }
-      .home-card:hover {
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        transform: translateY(-2px);
-      }
-      .home-card h3 {
-        margin: 0 0 8px 0;
-        font-size: 18px;
-        color: #0d6efd;
-      }
-      .home-card p { margin: 0; line-height: 1.7; }
+      .about-item h3 { color: var(--primary); font-size: 16px; margin: 0 0 8px; font-weight: 600; }
+      .about-item p  { color: var(--text-body); font-size: 15px; line-height: 1.7; margin: 0; }
 
-      .list-simple {
-        display: grid;
-        gap: 10px;
-        padding: 0;
-        margin: 0;
-        list-style: none;
+      /* 方向列表 — 两列，图标在标题左 */
+      .dir-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px;
+        padding: 28px 0; border-bottom: 1px solid var(--border);
       }
-      .list-item {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 10px;
-        padding: 14px 16px;
-        transition: box-shadow 0.2s ease, transform 0.2s ease;
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 10px;
-        align-items: baseline;
+      .dir-item { padding: 6px 0; }
+      .dir-item h3 { font-size: 15px; font-weight: 600; color: var(--text-heading); margin: 0 0 4px; }
+      .dir-item p  { font-size: 14px; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+      /* 论文/动态列表 — 简单行 */
+      .info-list { margin: 20px 0; border-bottom: 1px solid var(--border); }
+      .info-row {
+        display: grid; grid-template-columns: 100px 1fr auto;
+        gap: 16px; align-items: baseline; padding: 12px 0;
+        border-bottom: 1px solid var(--border);
       }
-      .list-item:hover {
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        transform: translateY(-1px);
+      .info-row:last-child { border-bottom: none; }
+      .info-row .meta {
+        font-size: 13px; font-weight: 600; color: var(--text-muted); white-space: nowrap;
       }
-      .list-item .meta {
-        color: #888;
-        font-weight: 600;
-        font-size: 13px;
-        min-width: 80px;
+      .info-row a { font-size: 15px; color: var(--text-heading); }
+      .info-row a:hover { color: var(--primary); }
+      .info-row .more { font-size: 13px; color: var(--text-muted); }
+
+      /* 区块标题右侧链接 */
+      .title-row {
+        display: flex; align-items: baseline; justify-content: space-between;
+        padding-top: 32px;
       }
-      .list-item a {
-        color: #333;
-        text-decoration: none;
+      .title-row h2 { margin: 0; }
+      .title-row .view-all { font-size: 13px; font-weight: 600; color: var(--primary); }
+      .title-row .view-all:hover { text-decoration: underline; }
+
+      @media (max-width: 768px) {
+        .about-grid, .dir-grid { grid-template-columns: 1fr; gap: 20px; }
+        .info-row { grid-template-columns: 80px 1fr; }
+        .info-row .more { display: none; }
+        .hero { padding: 40px 16px 32px; }
+        .hero .cta { flex-direction: column; align-items: center; }
       }
-      .list-item a:hover { color: #0d6efd; text-decoration: underline; }
-      
+
+      /* === 滚轮渐入动画 === */
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      .reveal-stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+      .reveal-stagger > *.visible { opacity: 1; transform: translateY(0); }
+
+      /* === 滚动进度条 === */
+      #scroll-bar {
+        position: fixed; top: 0; left: 0; height: 3px;
+        background: var(--nav-active); z-index: 9999;
+        width: 0%; transition: width 0.1s linear;
+      }
     </style>
-    <!-- === END: 关键样式修改 === -->
-
   </head>
   <body>
-    
+
+    <div id="scroll-bar"></div>
+
+    <div class="page-watermark" id="page-watermark"></div>
+
     <a class="skip-link" href="#main-content">跳到主要内容</a>
-    
-    <!-- === START: 全新的页眉 (Header) === -->
+
     <header class="main-header">
-        
-        <!-- 1 & 2. 左侧的 Logo 组 -->
-        <div class="header-logo-cluster">
-            <!-- 1. 学校 Logo (黑字, png) -->
-            <img src="images/black logo.png" 
-                 alt="广东第二师范学院" 
-                 class="logo-university"
-                 onerror="this.src='https://placehold.co/320x80/f8f8f8/666?text=University+Logo'; this.onerror=null;">
-                 
-            <!-- 2. 学院 Logo (sch logo) -->
-            <img src="images/sch logo.png" 
-                 alt="学院Logo" 
-                 class="logo-school"
-                 onerror="this.src='https://placehold.co/140x80/f8f8f8/666?text=School+Logo'; this.onerror=null;">
-        </div>
-
-        <!-- 3. 中间的导航链接 -->
         <nav aria-label="主导航">
-            <a href="index.html" aria-current="page">主页</a>
-            <a href="research.html">研究方向</a>
+            <a href="index.html" class="active" aria-current="page" id="nav-home">主页</a>
+            <a href="research.html" id="nav-research">研究方向</a>
             <a href="people.html">团队成员</a>
-            <a href="publications.html">科研成果</a>
-            <a href="news.html">新闻动态</a>
+            <a href="publications.html" id="nav-pubs">科研成果</a>
+            <a href="news.html" id="nav-news">新闻动态</a>
         </nav>
-
-        <!-- 4. 右侧的 Lab Logo (jpg) -->
-        <a href="index.html" class="logo-lab-link">
-          <img src="images/logo.jpg" 
-               alt="实验室Logo" 
-               class="logo-lab"
-               onerror="this.src='httpshttps://placehold.co/200x100/f8f8f8/666?text=Lab+Logo'; this.onerror=null;">
-        </a>
-        
-        <!-- 5. 移动端菜单按钮 -->
-        <!-- (注意：这个按钮在电脑上隐藏，在手机上显示) -->
-        <!-- (我把它放在 Lab Logo 旁边，是为了手机布局) -->
         <button class="menu-toggle" aria-label="展开或收起导航">☰</button>
-
     </header>
-    <!-- === END: 全新的页眉 === -->
 
-
-    <!-- === 首页：Hero === -->
+    <!-- Hero — 唯一居中的区域 -->
     <section class="hero">
-      <h1>广东第二师范学院深度视觉实验室</h1>
-      <p>Deep Vision Lab @ GDEI · 计算机视觉与人工智能的前沿研究</p>
+      <h1>深度视觉实验室</h1>
+      <p>Deep Vision Lab @ GDEI · 计算机视觉与人工智能</p>
       <div class="cta">
-        <a class="btn btn-primary" href="research.html">查看研究方向</a>
+        <a class="btn btn-primary" href="research.html">研究方向</a>
         <a class="btn btn-outline" href="people.html#join-us">加入我们</a>
       </div>
     </section>
 
-    <!-- === 首页主体 === -->
     <div class="home-container" id="main-content">
 
-      <!-- 关于我们（简述） -->
-      <section class="home-section">
-        <div class="section-title">
-          <h2>关于我们</h2>
+      <!-- 关于我们 — 双栏文本，无卡片 -->
+      <div class="about-grid reveal">
+        <div class="about-item">
+          <h3>研究愿景</h3>
+          <p>我们关注视觉理解、生成式模型与跨模态智能，致力于面向教育、农业与公共安全的关键技术突破与落地应用。</p>
         </div>
-        <div class="grid-2">
-          <div class="home-card">
-            <h3>研究愿景</h3>
-            <p>我们关注视觉理解、生成式模型与跨模态智能，致力于面向教育、农业与公共安全的关键技术突破与落地应用。</p>
-          </div>
-          <div class="home-card">
-            <h3>核心方向</h3>
-            <p>视频质量评估 · 农业识别 · 教师质量评估 · 扩散模型应用 · 人群计数</p>
-          </div>
+        <div class="about-item">
+          <h3>核心方向</h3>
+          <p>视频质量评估 · 农业识别 · 教师质量评估 · 扩散模型应用 · 人群计数</p>
         </div>
-      </section>
+      </div>
 
-      <!-- 研究方向预览 -->
-      <section class="home-section">
-        <div class="section-title">
-          <h2>主要研究方向</h2>
-          <a href="research.html">全部研究方向 →</a>
+      <!-- 研究方向 — 两列列表，无卡片 -->
+      <div class="title-row reveal" id="section-research">
+        <h2>研究方向</h2>
+        <a href="research.html" class="view-all">全部 &rarr;</a>
+      </div>
+      <div class="dir-grid reveal-stagger">
+        <div class="dir-item">
+          <h3>📹 视频质量评估</h3>
+          <p>无参考与感知质量建模，支持实时质量监控与自适应优化。</p>
         </div>
-        <div class="grid-3">
-          <div class="home-card">
-            <h3>📹 视频质量评估</h3>
-            <p>无参考与感知质量建模，支持实时质量监控与自适应优化。</p>
-          </div>
-          <div class="home-card">
-            <h3>🌾 农业识别</h3>
-            <p>病虫害识别、作物监测与产量预测，赋能智慧农业。</p>
-          </div>
-          <div class="home-card">
-            <h3>👨‍🏫 教师质量评估</h3>
-            <p>教学行为分析与课堂互动评估，助力教育质量提升。</p>
-          </div>
-          <div class="home-card">
-            <h3>🎨 扩散模型应用</h3>
-            <p>图像生成、修复与可控编辑，探索生成式AI的行业落地。</p>
-          </div>
-          <div class="home-card">
-            <h3>👥 人群计数</h3>
-            <p>密度估计、跨场景泛化与实时预警，服务公共安全与治理。</p>
-          </div>
-          <div class="home-card">
-            <h3>🤝 产学研合作</h3>
-            <p>联合高校与企业开展前沿研究与技术转化。</p>
-          </div>
+        <div class="dir-item">
+          <h3>🌾 农业识别</h3>
+          <p>病虫害识别、作物监测与产量预测，赋能智慧农业。</p>
         </div>
-      </section>
+        <div class="dir-item">
+          <h3>👨‍🏫 教师质量评估</h3>
+          <p>教学行为分析与课堂互动评估，助力教育质量提升。</p>
+        </div>
+        <div class="dir-item">
+          <h3>🎨 扩散模型应用</h3>
+          <p>图像生成、修复与可控编辑，探索生成式AI的行业落地。</p>
+        </div>
+        <div class="dir-item">
+          <h3>👥 人群计数</h3>
+          <p>密度估计、跨场景泛化与实时预警，服务公共安全与治理。</p>
+        </div>
+        <div class="dir-item">
+          <h3>🤝 产学研合作</h3>
+          <p>联合高校与企业开展前沿研究与技术转化。</p>
+        </div>
+      </div>
 
-      <!-- 精选论文 -->
-      <section class="home-section">
-        <div class="section-title">
-          <h2>精选论文</h2>
-          <a href="publications.html">更多成果 →</a>
+      <!-- 精选论文 — 简单行列表 -->
+      <div class="title-row reveal" id="section-pubs" id="section-pubs">
+        <h2>精选论文</h2>
+        <a href="publications.html" class="view-all">更多成果 &rarr;</a>
+      </div>
+      <div class="info-list reveal-stagger">
+        <div class="info-row">
+          <span class="meta">IEEE TBC&nbsp;·&nbsp;2025</span>
+          <a href="publications.html">CLIPVQA: Video Quality Assessment via CLIP</a>
+          <span class="more">&rarr;</span>
         </div>
-        <ul class="list-simple">
-          <li class="list-item">
-            <span class="meta">IEEE TBC · 2025</span>
-            <a href="publications.html">CLIPVQA: Video Quality Assessment via CLIP</a>
-          </li>
-          <li class="list-item">
-            <span class="meta">ESWA · 2024</span>
-            <a href="publications.html">CoSTA: Co-training Spatial-Temporal Attention for Blind Video Quality Assessment</a>
-          </li>
-          <li class="list-item">
-            <span class="meta">ICIPAI · 2026</span>
-            <a href="publications.html">GLEAM: Mitigating Barren Plateaus in Hybrid Quantum Machine Learning via Small-World Entanglement</a>
-          </li>
-        </ul>
-      </section>
+        <div class="info-row">
+          <span class="meta">ESWA&nbsp;·&nbsp;2024</span>
+          <a href="publications.html">CoSTA: Co-training Spatial-Temporal Attention for Blind Video Quality Assessment</a>
+          <span class="more">&rarr;</span>
+        </div>
+        <div class="info-row">
+          <span class="meta">ICIPAI&nbsp;·&nbsp;2026</span>
+          <a href="publications.html">GLEAM: Mitigating Barren Plateaus in Hybrid Quantum Machine Learning via Small-World Entanglement</a>
+          <span class="more">&rarr;</span>
+        </div>
+      </div>
 
-      <!-- 最新动态 -->
-      <section class="home-section">
-        <div class="section-title">
-          <h2>最新动态</h2>
-          <a href="news.html">全部新闻 →</a>
+      <!-- 最新动态 — 同上 -->
+      <div class="title-row reveal" id="section-news">
+        <h2>最新动态</h2>
+        <a href="news.html" class="view-all">全部新闻 &rarr;</a>
+      </div>
+      <div class="info-list reveal-stagger">
+        <div class="info-row">
+          <span class="meta">2026</span>
+          <a href="news.html">项目荣获 2026 年广东省挑战杯省级铜奖</a>
+          <span class="more">&rarr;</span>
         </div>
-        <ul class=”list-simple”>
-          <li class=”list-item”>
-            <span class=”meta”>2026</span>
-            <a href=”news.html”>项目荣获2026年广东省挑战杯省级铜奖</a>
-          </li>
-          <li class=”list-item”>
-            <span class=”meta”>2026</span>
-            <a href=”news.html”>GLEAM 论文被 ICIPAI 2026 接收</a>
-          </li>
-          <li class=”list-item”>
-            <span class=”meta”>2025-07</span>
-            <a href=”news.html”>学子在2025年世界职业院校技能大赛中荣获佳绩</a>
-          </li>
-        </ul>
-      </section>
+        <div class="info-row">
+          <span class="meta">2026</span>
+          <a href="news.html">GLEAM 论文被 ICIPAI 2026 接收</a>
+          <span class="more">&rarr;</span>
+        </div>
+        <div class="info-row">
+          <span class="meta">2025-07</span>
+          <a href="news.html">学子在 2025 年世界职业院校技能大赛中荣获佳绩</a>
+          <span class="more">&rarr;</span>
+        </div>
+      </div>
 
     </div>
-    
 
-    <!-- === START: 全新的页脚 (Footer) === -->
     <footer class="main-footer">
         <div class="footer-content">
-            <!-- 学校 Logo (白字) -->
-            <img src="images/white logo.png" 
-                 alt="广东第二师范学院" 
-                 class="logo-university-footer"
-                 onerror="this.src='httpshttps://placehold.co/400x70/555/ccc?text=University+Logo+Footer'; this.onerror=null;">
-            
+            <img src="images/white logo.png" alt="广东第二师范学院" class="logo-university-footer"
+                 onerror="this.src='https://placehold.co/400x70/555/ccc?text=University+Logo+Footer'; this.onerror=null;">
             <address>
-              <strong>联系我们</strong><br>
+              <strong style="color: var(--footer-text);">联系我们</strong><br>
               广东第二师范学院 海珠校区<br>
               物理与信息工程学院 校众创空间<br>
-              <span class="tone">Email: xingfengchuang@gdei.edu.cn</span>
+              <span style="color: var(--footer-link);">xingfengchuang@gdei.edu.cn</span>
             </address>
             <address>
-                <!-- "2025 (或当前年份)" 将会被下面的JS脚本自动替换 -->
-                Copyright © <span id="copyright-year">2025</span><br>
-                <span class="tone"><a href="https://www.gdei.edu.cn/" target="_blank">广东第二师范学院</a></span>
+                Copyright &copy; <span id="copyright-year">2025</span><br>
+                <a href="https://www.gdei.edu.cn/" target="_blank">广东第二师范学院</a>
             </address>
         </div>
     </footer>
-    <!-- === END: 全新的页脚 === -->
-    
+
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-hover-dropdown.js"></script>
-    <script type="text/javascript" src="js/viewer.js"></script>
-    <!-- <script type="text/javascript" src="js/menus.js"></script> -->
-    <script type="text/javascript">
-      // $(function(){
-      //   init();
-      // });
-    </script>
-    
-    <!-- === START: 自动更新年份脚本 === -->
-    <script type="text/javascript">
-      try {
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
-      } catch (e) {
-        console.error("无法自动更新年份:", e);
-      }
-    </script>
-    <!-- === END: 自动更新年份脚本 === -->
-    <script type="text/javascript">
+    <script src="js/viewer.js"></script>
+    <script src="js/common.js?v=footer-reveal"></script>
+    <script>
+      try { document.getElementById('copyright-year').textContent = new Date().getFullYear(); } catch (e) {}
       (function () {
-        try {
-          var toggle = document.querySelector('.main-header .menu-toggle');
-          var header = document.querySelector('.main-header');
-          if (toggle && header) {
-            toggle.addEventListener('click', function () {
-              header.classList.toggle('nav-open');
-            });
-          }
-        } catch (e) { console.error(e); }
+        var t = document.querySelector('.main-header .menu-toggle');
+        var h = document.querySelector('.main-header');
+        if (t && h) t.addEventListener('click', function () { h.classList.toggle('nav-open'); });
       })();
+
+      // === 滚轮渐入动画 ===
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+      document.querySelectorAll('.reveal-stagger').forEach(function (container) {
+        var children = container.children;
+        for (var i = 0; i < children.length; i++) {
+          children[i].style.transitionDelay = (i * 0.08) + 's';
+          observer.observe(children[i]);
+        }
+      });
+
+      // === 全页水印视差 ===
+      var pageWM = document.getElementById('page-watermark');
+      if (pageWM) {
+        window.addEventListener('scroll', function () {
+          var scrollY = window.scrollY || document.documentElement.scrollTop;
+          var docH = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = docH > 0 ? scrollY / docH : 0;
+          var offsetY = pct * 120; // 最多移动 120px
+          pageWM.style.transform = 'translate(-50%, calc(-50% - ' + offsetY + 'px))';
+        }, { passive: true });
+      }
+
+      // === 导航滚动高亮 ===
+      var sections = {
+        'section-research': 'nav-research',
+        'section-pubs': 'nav-pubs',
+        'section-news': 'nav-news'
+      };
+      var navLinks = {};
+      for (var key in sections) {
+        navLinks[key] = document.getElementById(sections[key]);
+      }
+
+      var navObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var link = navLinks[entry.target.id];
+          if (!link) return;
+          if (entry.isIntersecting) {
+            // Clear all active states
+            document.querySelectorAll('.main-header nav a').forEach(function (a) { a.classList.remove('active'); });
+            link.classList.add('active');
+          }
+        });
+      }, { threshold: 0.4 });
+
+      for (var id in sections) {
+        var el = document.getElementById(id);
+        if (el) navObserver.observe(el);
+      }
+
+      // Reset to home when scrolling back to top
+      var homeLink = document.getElementById('nav-home');
+      var heroEl = document.querySelector('.hero');
+      if (homeLink && heroEl) {
+        var heroObserver = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            document.querySelectorAll('.main-header nav a').forEach(function (a) { a.classList.remove('active'); });
+            homeLink.classList.add('active');
+          }
+        }, { threshold: 0.3 });
+        heroObserver.observe(heroEl);
+      }
+
+      // === 滚动进度条 ===
+      var bar = document.getElementById('scroll-bar');
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      }, { passive: true });
     </script>
-    
+
   </body>
 </html>

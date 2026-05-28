@@ -7,336 +7,129 @@
     <meta name="description" content="广东第二师范学院深度视觉实验室新闻与活动">
     <title>新闻动态 - 广东第二师范学院深度视觉实验室</title>
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-      :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --primary-light: #eff6ff;
-        --accent-purple: #8b5cf6;
-        --text-main: #1f2937;
-        --text-muted: #6b7280;
-        --bg-light: #f8fafc;
-        --white: #ffffff;
-        --border: #e5e7eb;
-        --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.04);
-        --radius: 12px;
-      }
+      /* === 新闻页专属 === */
 
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body {
-        font-family: 'Inter', 'Noto Sans SC', sans-serif;
-        color: var(--text-main);
-        background-color: var(--white);
-        -webkit-font-smoothing: antialiased;
-      }
-      a { text-decoration: none; transition: all 0.2s ease; }
+      .container-custom { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-      .container-custom {
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      /* === Header === */
-      .main-header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--border);
-        height: 100px;
-        display: flex;
-        align-items: center;
-      }
-      .header-content {
-        width: 100%;
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-      }
-      .header-left { display: flex; align-items: center; gap: 20px; }
-      .logo-u { height: 64px; }
-      .logo-s { height: 56px; }
-      .main-nav { display: flex; justify-content: center; gap: 32px; }
-      .main-nav a {
-        font-weight: 500;
-        font-size: 16px;
-        color: var(--text-main);
-        position: relative;
-        padding-bottom: 4px;
-      }
-      .main-nav a:hover, .main-nav a.active { color: var(--primary); }
-      .main-nav a.active::after {
-        content: '';
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--primary);
-        border-radius: 2px;
-      }
-      .logo-lab { height: 60px; }
-
-      /* === Sub Hero === */
-      .sub-hero {
-        background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
-        padding: 80px 0 40px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .sub-hero h1 {
-        font-size: 32px;
-        font-weight: 800;
-        color: #1e293b;
-        margin-bottom: 8px;
-        position: relative;
-        z-index: 1;
-      }
-      .sub-hero .ghost-text {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 80px;
-        font-weight: 900;
-        color: rgba(0,0,0,0.02);
-        text-transform: uppercase;
-        letter-spacing: 8px;
-        pointer-events: none;
-        white-space: nowrap;
-      }
-      .sub-hero p {
-        color: var(--text-muted);
-        font-size: 16px;
-        font-weight: 500;
-        letter-spacing: 2px;
-      }
-
-      /* === Filters === */
-      .filters-container {
-        margin: 40px 0;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-      }
-      .search-box {
-        position: relative;
-        max-width: 500px;
-        display: flex;
-        align-items: center;
-      }
+      /* 筛选器 */
+      .filters-container { margin: 24px 0 36px; display: flex; flex-direction: column; gap: 20px; }
+      .search-box { position: relative; max-width: 400px; display: flex; align-items: center; }
       .search-box input {
-        width: 100%;
-        padding: 14px 20px 14px 48px;
-        border-radius: 50px;
-        border: 1px solid var(--border);
-        background: var(--bg-light);
-        outline: none;
-        font-size: 14px;
-        transition: all 0.2s ease;
+        width: 100%; padding: 10px 16px 10px 40px;
+        border-radius: 6px; border: 1px solid var(--border);
+        background: var(--bg-card); outline: none; font-size: 14px; transition: border-color 0.15s;
       }
-      .search-box input:focus { border-color: var(--primary); background: white; box-shadow: var(--shadow); }
-      .search-box i, .search-box svg {
-        position: absolute;
-        left: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-muted);
-        pointer-events: none;
-        width: 18px;
-        height: 18px;
+      .search-box input:focus { border-color: var(--nav-active); }
+      .search-box svg {
+        position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+        color: var(--text-muted); width: 16px; height: 16px; pointer-events: none;
       }
 
-      .chip-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-      }
-      .chip-label { font-size: 14px; font-weight: 700; color: #1e293b; margin-right: 8px; }
+      .chip-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+      .chip-label { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-right: 4px; }
       .chip {
-        padding: 8px 18px;
-        border-radius: 50px;
-        background: #f1f5f9;
-        color: #475569;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        padding: 6px 16px; border-radius: 4px; border: 1px solid var(--border);
+        background: var(--bg-card); color: var(--text-body); font-size: 13px; font-weight: 500;
+        cursor: pointer; transition: all 0.15s;
       }
-      .chip:hover { background: #e2e8f0; }
-      .chip.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+      .chip:hover { border-color: var(--nav-active); color: var(--nav-active); }
+      .chip.active { background: var(--nav-active); color: var(--text-inverse); border-color: var(--nav-active); }
 
-      /* === News List === */
+      /* 新闻卡片网格 */
       .news-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-        gap: 32px;
-        margin-bottom: 60px;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 24px; margin-bottom: 48px;
       }
       .news-card {
-        background: white;
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        padding: 32px;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
+        background: var(--bg-card); border-radius: 6px; border: 1px solid var(--border);
+        padding: 24px; display: flex; flex-direction: column;
+        transition: border-color 0.15s;
       }
-      .news-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow);
-        border-color: var(--primary-light);
-      }
+      .news-card:hover { border-color: var(--nav-active); }
+
       .news-meta {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 13px;
-        color: var(--text-muted);
-        margin-bottom: 16px;
+        display: flex; align-items: center; gap: 10px;
+        font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 12px;
       }
-      .meta-item { display: flex; align-items: center; gap: 6px; }
+      .meta-item { display: flex; align-items: center; gap: 4px; }
       .news-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: #0f172a;
-        margin-bottom: 12px;
-        line-height: 1.5;
-        flex-grow: 0;
+        font-size: 16px; font-weight: 700; color: var(--text-heading);
+        margin-bottom: 8px; line-height: 1.5;
       }
       .news-desc {
-        font-size: 14px;
-        color: #4b5563;
-        line-height: 1.6;
-        margin-bottom: 20px;
-        flex-grow: 1;
+        font-size: 14px; color: var(--text-body); line-height: 1.6;
+        margin-bottom: 16px; flex-grow: 1;
       }
-      .news-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-      .tag {
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--primary);
-        background: var(--primary-light);
-        padding: 4px 10px;
-        border-radius: 4px;
+      .news-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+      .news-tags .tag {
+        font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
+        color: var(--primary); background: var(--primary-light);
+        padding: 3px 8px; border-radius: 3px; border: none;
       }
       .news-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--primary);
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 13px; font-weight: 600; color: var(--primary); text-decoration: none;
       }
-      .news-btn:hover { gap: 12px; }
+      .news-btn:hover { text-decoration: underline; }
 
-      .load-more-box { text-align: center; margin-bottom: 80px; }
+      .load-more-box { text-align: center; margin-bottom: 60px; }
       .btn-more {
-        padding: 12px 32px;
-        border-radius: 50px;
-        border: 1px solid var(--primary);
-        background: transparent;
-        color: var(--primary);
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        padding: 10px 28px; border-radius: 6px; border: 1px solid var(--border);
+        background: var(--bg-card); color: var(--text-body); font-weight: 600; font-size: 14px;
+        cursor: pointer; transition: all 0.15s;
       }
-      .btn-more:hover { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+      .btn-more:hover { border-color: var(--nav-active); color: var(--nav-active); }
 
-      /* === Empty State === */
+      /* 空状态 */
       .empty-state {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 80px 20px;
-        background: #f8fafc;
-        border-radius: 24px;
+        grid-column: 1 / -1; text-align: center; padding: 60px 20px;
+        background: var(--bg-page); border-radius: 6px;
         border: 2px dashed var(--border);
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
+        display: none; flex-direction: column; align-items: center; gap: 12px;
       }
-      .empty-state i, .empty-state svg {
-        color: var(--text-muted);
-        opacity: 0.5;
-        width: 48px;
-        height: 48px;
-      }
-      .empty-state p {
-        color: var(--text-muted);
-        font-size: 16px;
-        font-weight: 500;
-      }
-
-      /* === Footer === */
-      .main-footer {
-        background: #0f172a;
-        color: #94a3b8;
-        padding: 80px 0 40px;
-      }
-      .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
-      .footer-logo img { height: 60px; margin-bottom: 20px; }
-      .footer-col h4 { color: white; margin-bottom: 24px; font-size: 16px; font-weight: 700; }
-      .footer-col p, .footer-col a { font-size: 14px; margin-bottom: 12px; display: block; color: #94a3b8; }
-      .footer-col a:hover { color: white; }
-      .footer-bottom {
-        margin-top: 60px;
-        padding-top: 32px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        text-align: center;
-        font-size: 14px;
-      }
+      .empty-state svg { color: var(--text-muted); opacity: 0.4; width: 40px; height: 40px; }
+      .empty-state p { color: var(--text-muted); font-size: 15px; font-weight: 500; }
 
       @media (max-width: 768px) {
-        .main-nav { display: none; }
-        .footer-grid { grid-template-columns: 1fr; }
         .news-grid { grid-template-columns: 1fr; }
       }
+    
+      .watermark::before { opacity: 0.07; }
     </style>
   </head>
   <body>
+
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
     <header class="main-header">
-      <div class="container-custom header-content">
-        <div class="header-left">
-          <img src="images/black logo.png" alt="GDEI" class="logo-u">
-          <img src="images/sch logo.png" alt="School" class="logo-s">
-        </div>
-        <nav class="main-nav">
-          <a href="index.html">首页</a>
-          <a href="research.html">研究方向</a>
-          <a href="people.html">团队成员</a>
-          <a href="publications.html">科研成果</a>
-          <a href="news.html" class="active">新闻动态</a>
+        <nav aria-label="主导航">
+            <a href="index.html">主页</a>
+            <a href="research.html">研究方向</a>
+            <a href="people.html">团队成员</a>
+            <a href="publications.html">科研成果</a>
+            <a href="news.html" class="active">新闻动态</a>
         </nav>
-        <a href="index.html">
-          <img src="images/logo.jpg" alt="Lab" class="logo-lab">
-        </a>
-      </div>
+        <button class="menu-toggle" aria-label="展开或收起导航">☰</button>
     </header>
 
-    <main>
-      <section class="sub-hero">
-        <div class="container-custom">
-          <div class="ghost-text">NEWS</div>
-          <h1>新闻动态</h1>
-          <p>News & Events</p>
-        </div>
+    <main id="main-content">
+      <section class="page-title watermark">
+        <h1>新闻动态</h1>
+        <p>News &amp; Events</p>
       </section>
 
       <div class="container-custom">
         <div class="filters-container">
           <div class="search-box">
             <i data-lucide="search"></i>
-            <input type="text" id="searchInput" placeholder="搜索新闻内容...">
+            <input type="text" id="searchInput" placeholder="搜索新闻...">
           </div>
 
           <div class="chip-row">
@@ -360,140 +153,99 @@
         <div class="news-grid" id="newsList">
           <div id="emptyState" class="empty-state">
             <i data-lucide="search-x"></i>
-            <p>未找到符合条件的新闻内容</p>
+            <p>未找到符合条件的新闻</p>
           </div>
 
-          <!-- 2026省挑战杯铜奖 -->
           <article class="news-card" data-year="2026" data-type="award">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 获奖新闻</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 获奖</span>
             </div>
-            <h3 class="news-title">项目荣获2026年广东省挑战杯省级铜奖</h3>
-            <p class="news-desc">实验室项目"视源科技-面向AI时代的真实人脸恢复解决方案"荣获2026年广东省挑战杯省级铜奖。</p>
-            <div class="news-tags">
-              <span class="tag">挑战杯</span>
-              <span class="tag">真实人脸恢复</span>
-            </div>
+            <h3 class="news-title">项目荣获 2026 年广东省挑战杯省级铜奖</h3>
+            <p class="news-desc">实验室项目"视源科技-面向AI时代的真实人脸恢复解决方案"荣获 2026 年广东省挑战杯省级铜奖。</p>
+            <div class="news-tags"><span class="tag">挑战杯</span><span class="tag">真实人脸恢复</span></div>
           </article>
 
-          <!-- 校孵化窝 -->
           <article class="news-card" data-year="2026" data-type="event">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 项目入驻</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 入驻</span>
             </div>
             <h3 class="news-title">"视源科技-面向AI时代的真实人脸恢复解决方案"入驻校孵化窝</h3>
-            <p class="news-desc">实验室项目"视源科技-面向AI时代的真实人脸恢复解决方案"成功入驻学校创业孵化窝，获得学校创业孵化支持。</p>
-            <div class="news-tags">
-              <span class="tag">校孵化窝</span>
-              <span class="tag">真实人脸恢复</span>
-              <span class="tag">创新创业</span>
-            </div>
+            <p class="news-desc">实验室项目成功入驻学校创业孵化窝，获得学校创业孵化支持。</p>
+            <div class="news-tags"><span class="tag">校孵化窝</span><span class="tag">真实人脸恢复</span><span class="tag">创新创业</span></div>
           </article>
 
-          <!-- 孵化窝：脑机交互 -->
           <article class="news-card" data-year="2026" data-type="event">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 项目入驻</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 入驻</span>
             </div>
-            <h3 class="news-title">"视源科技--基于可控视觉触发与SSVEP的轻量化脑机交互控制系统"入驻校孵化窝</h3>
-            <p class="news-desc">实验室项目"基于可控视觉触发与SSVEP的轻量化脑机交互控制系统"成功入驻学校创业孵化窝，探索脑机接口与视觉AI的前沿交叉应用。</p>
-            <div class="news-tags">
-              <span class="tag">校孵化窝</span>
-              <span class="tag">脑机交互</span>
-              <span class="tag">SSVEP</span>
-            </div>
+            <h3 class="news-title">"基于可控视觉触发与SSVEP的轻量化脑机交互控制系统"入驻校孵化窝</h3>
+            <p class="news-desc">探索脑机接口与视觉AI的前沿交叉应用。</p>
+            <div class="news-tags"><span class="tag">校孵化窝</span><span class="tag">脑机交互</span><span class="tag">SSVEP</span></div>
           </article>
 
-          <!-- 孵化窝：智能照明 -->
           <article class="news-card" data-year="2026" data-type="event">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 项目入驻</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 入驻</span>
             </div>
             <h3 class="news-title">"基于视觉AI的办公区域智能照明控制系统"入驻校孵化窝</h3>
-            <p class="news-desc">实验室项目"基于视觉AI的办公区域智能照明控制系统--人体存在+轨迹预判节能方案"成功入驻学校创业孵化窝，利用视觉AI实现办公区域智能照明节能控制。</p>
-            <div class="news-tags">
-              <span class="tag">校孵化窝</span>
-              <span class="tag">视觉AI</span>
-              <span class="tag">智能照明</span>
-            </div>
+            <p class="news-desc">利用视觉AI实现办公区域智能照明节能控制。</p>
+            <div class="news-tags"><span class="tag">校孵化窝</span><span class="tag">视觉AI</span><span class="tag">智能照明</span></div>
           </article>
 
-          <!-- GLEAM 论文 -->
           <article class="news-card" data-year="2026" data-type="paper">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 论文动态</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 论文</span>
             </div>
             <h3 class="news-title">GLEAM 论文被 ICIPAI 2026 接收</h3>
-            <p class="news-desc">Zhaoxuan Ding、Fengchuang Xing、Yu Xia、Peiyuan Zeng 完成论文"GLEAM: Mitigating Barren Plateaus in Hybrid Quantum Machine Learning via Small World Entanglement"，已被 ICIPAI 2026 接收。</p>
-            <div class="news-tags">
-              <span class="tag">ICIPAI 2026</span>
-              <span class="tag">Hybrid Quantum Machine Learning</span>
-            </div>
+            <p class="news-desc">Zhaoxuan Ding、Fengchuang Xing、Yu Xia、Peiyuan Zeng 完成论文，已被 ICIPAI 2026 接收。</p>
+            <div class="news-tags"><span class="tag">ICIPAI 2026</span><span class="tag">Quantum ML</span></div>
           </article>
 
-          <!-- Shiming Wu 论文 1 -->
           <article class="news-card" data-year="2026" data-type="paper">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 论文动态</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 论文</span>
             </div>
             <h3 class="news-title">Kinematic Smoothness Regularization for Action Chunking in Real-World Robotic Manipulation</h3>
-            <p class="news-desc">Shiming Wu、Fengchuang Xing 完成论文"Kinematic Smoothness Regularization for Action Chunking in Real-World Robotic Manipulation"，已被 EI 会议接收。</p>
-            <div class="news-tags">
-              <span class="tag">EI 会议</span>
-              <span class="tag">机器人操作</span>
-              <span class="tag">动作分块</span>
-            </div>
+            <p class="news-desc">Shiming Wu、Fengchuang Xing 完成论文，已被 EI 会议接收。</p>
+            <div class="news-tags"><span class="tag">EI 会议</span><span class="tag">机器人操作</span></div>
           </article>
 
-          <!-- Shiming Wu 论文 2 -->
           <article class="news-card" data-year="2026" data-type="paper">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2026</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 论文动态</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 论文</span>
             </div>
             <h3 class="news-title">SMJ-ACT: Chunk-Aware Stable Minimum-Jerk Execution Refinement for ACT Policies</h3>
-            <p class="news-desc">Shiming Wu、Fengchuang Xing 完成论文"SMJ-ACT: Chunk-Aware Stable Minimum-Jerk Execution Refinement for ACT Policies"，已被 EI 会议接收。</p>
-            <div class="news-tags">
-              <span class="tag">EI 会议</span>
-              <span class="tag">机器人操作</span>
-              <span class="tag">ACT策略</span>
-            </div>
+            <p class="news-desc">Shiming Wu、Fengchuang Xing 完成论文，已被 EI 会议接收。</p>
+            <div class="news-tags"><span class="tag">EI 会议</span><span class="tag">ACT策略</span></div>
           </article>
 
-          <!-- 荔湾区创新创业大赛 -->
           <article class="news-card" data-year="2025" data-type="award">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2025-10-31</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 获奖新闻</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 获奖</span>
             </div>
-            <h3 class="news-title">我院学子在2025年广州市荔湾区创新创业大赛中荣获佳绩</h3>
-            <p class="news-desc">我校物理与信息工程学院四个项目参赛，De-Fit智愈康盒、True-Face智颜引擎、AI禽蛋智检仪三个项目荣获大赛"优胜奖"。</p>
-            <div class="news-tags">
-              <span class="tag">创新创业</span>
-              <span class="tag">人工智能</span>
-            </div>
-            <a href="https://www.gdei.edu.cn/wlyxxgcx/2025/10/31/c533a101739/pagem.htm" target="_blank" class="news-btn">阅读详情 <i data-lucide="arrow-right" style="width:16px"></i></a>
+            <h3 class="news-title">我院学子在 2025 年广州市荔湾区创新创业大赛中荣获佳绩</h3>
+            <p class="news-desc">De-Fit智愈康盒、True-Face智颜引擎、AI禽蛋智检仪三个项目荣获大赛"优胜奖"。</p>
+            <div class="news-tags"><span class="tag">创新创业</span><span class="tag">AI</span></div>
+            <a href="https://www.gdei.edu.cn/wlyxxgcx/2025/10/31/c533a101739/pagem.htm" target="_blank" class="news-btn">阅读详情 <i data-lucide="arrow-right" style="width:14px"></i></a>
           </article>
 
-          <!-- 世界职业院校技能大赛 -->
           <article class="news-card" data-year="2025" data-type="award">
             <div class="news-meta">
               <span class="meta-item"><i data-lucide="calendar" style="width:14px"></i> 2025-07-15</span>
-              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 获奖新闻</span>
+              <span class="meta-item"><i data-lucide="tag" style="width:14px"></i> 获奖</span>
             </div>
-            <h3 class="news-title">学子在2025年世界职业院校技能大赛广东赛区人工智能赛道遴选赛中荣获佳绩</h3>
-            <p class="news-desc">我校团队围绕"基于Diffusion-Mamba的面部美颜方案"参赛，荣获普通本科小组第4名的优异成绩。</p>
-            <div class="news-tags">
-              <span class="tag">技能大赛</span>
-              <span class="tag">Diffusion-Mamba</span>
-            </div>
-            <a href="https://www.gdei.edu.cn/wlyxxgcx/2025/07/08/c533a100060/pagem.htm" target="_blank" class="news-btn">阅读详情 <i data-lucide="arrow-right" style="width:16px"></i></a>
+            <h3 class="news-title">学子在 2025 年世界职业院校技能大赛广东赛区 AI 赛道中荣获佳绩</h3>
+            <p class="news-desc">我校团队围绕"基于Diffusion-Mamba的面部美颜方案"参赛，荣获普通本科小组第 4 名。</p>
+            <div class="news-tags"><span class="tag">技能大赛</span><span class="tag">Diffusion-Mamba</span></div>
+            <a href="https://www.gdei.edu.cn/wlyxxgcx/2025/07/08/c533a100060/pagem.htm" target="_blank" class="news-btn">阅读详情 <i data-lucide="arrow-right" style="width:14px"></i></a>
           </article>
         </div>
 
@@ -504,83 +256,69 @@
     </main>
 
     <footer class="main-footer">
-      <div class="container-custom footer-grid">
-        <div class="footer-col">
-          <img src="images/white logo.png" alt="Logo" style="height:60px;margin-bottom:20px">
-          <p>广东第二师范学院 深度视觉实验室</p>
-          <p>专注于计算机视觉与人工智能的前沿探索。</p>
+        <div class="footer-content">
+            <img src="images/white logo.png" alt="广东第二师范学院" class="logo-university-footer"
+                 onerror="this.src='https://placehold.co/350x60/555/ccc?text=University+Logo'; this.onerror=null;">
+            <address>
+              <strong style="color: var(--footer-text);">联系地址</strong><br>
+              广东第二师范学院 海珠校区<br>
+              物理与信息工程学院 校众创空间
+            </address>
+            <address>
+              <strong style="color: var(--footer-text);">联系方式</strong><br>
+              xingfengchuang@gdei.edu.cn<br>
+              <a href="https://www.gdei.edu.cn/" target="_blank">学校官网</a>
+            </address>
         </div>
-        <div class="footer-col">
-          <h4>联系我们</h4>
-          <p>广东第二师范学院 海珠校区</p>
-          <p>物理与信息工程学院 校众创空间</p>
-          <p>Email: xingfengchuang@gdei.edu.cn</p>
+        <div class="footer-bottom">
+          Copyright &copy; <span id="copyright-year">2025</span> 广东第二师范学院
         </div>
-        <div class="footer-col">
-          <h4>快速链接</h4>
-          <a href="research.html">研究方向</a>
-          <a href="people.html">团队成员</a>
-          <a href="publications.html">科研成果</a>
-          <a href="news.html">新闻动态</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>Copyright &copy; 2026 广东第二师范学院. All Rights Reserved.</p>
-      </div>
     </footer>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/common.js?v=footer-reveal"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       lucide.createIcons();
+      try { document.getElementById('copyright-year').textContent = new Date().getFullYear(); } catch (e) {}
+      (function () {
+        var t = document.querySelector('.main-header .menu-toggle');
+        var h = document.querySelector('.main-header');
+        if (t && h) t.addEventListener('click', function () { h.classList.toggle('nav-open'); });
+      })();
 
+      // 新闻筛选 + 搜索
       const chips = document.querySelectorAll('.chip');
       const cards = document.querySelectorAll('.news-card');
       const searchInput = document.getElementById('searchInput');
       const emptyState = document.getElementById('emptyState');
       const loadMoreBox = document.querySelector('.load-more-box');
-
-      let currentYear = 'all';
-      let currentType = 'all';
+      let currentYear = 'all', currentType = 'all';
 
       function filterNews() {
-        const query = searchInput.value.toLowerCase();
-        let hasResults = false;
-
-        cards.forEach(card => {
-          const year = card.dataset.year;
-          const type = card.dataset.type;
-          const content = card.innerText.toLowerCase();
-
-          const matchesYear = currentYear === 'all' || year === currentYear;
-          const matchesType = currentType === 'all' || type === currentType;
-          const matchesSearch = content.includes(query);
-
-          if (matchesYear && matchesType && matchesSearch) {
-            card.style.display = 'flex';
-            hasResults = true;
-          } else {
-            card.style.display = 'none';
-          }
+        const q = searchInput.value.toLowerCase(); let has = false;
+        cards.forEach(c => {
+          const ok = (currentYear === 'all' || c.dataset.year === currentYear)
+                  && (currentType === 'all' || c.dataset.type === currentType)
+                  && c.innerText.toLowerCase().includes(q);
+          c.style.display = ok ? 'flex' : 'none';
+          if (ok) has = true;
         });
-
-        emptyState.style.display = hasResults ? 'none' : 'flex';
-        if (loadMoreBox) {
-          loadMoreBox.style.display = hasResults ? 'block' : 'none';
-        }
+        emptyState.style.display = has ? 'none' : 'flex';
+        if (loadMoreBox) loadMoreBox.style.display = has ? 'block' : 'none';
       }
 
       chips.forEach(chip => {
         chip.addEventListener('click', () => {
-          const parent = chip.parentElement;
-          parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+          const p = chip.parentElement;
+          p.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
           chip.classList.add('active');
-
           if (chip.dataset.year) currentYear = chip.dataset.year;
           if (chip.dataset.type) currentType = chip.dataset.type;
-
           filterNews();
         });
       });
-
       searchInput.addEventListener('input', filterNews);
     </script>
   </body>

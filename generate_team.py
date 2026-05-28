@@ -124,22 +124,31 @@ def build_member_card(member: dict[str, str], photo_class: str, indent: str) -> 
         onerror = f"this.src='{PLACEHOLDER_IMAGE}'"
     else:
         fallback = "👨‍🏫" if member.get("id", "").startswith("t-") else "🎓"
-        onerror = f"this.style.display='none';this.parentNode.innerText='{fallback}'"
+        onerror = f"this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>{fallback}</span>'"
 
     email_html = ""
     if email:
-        email_html = f'\n{indent}    <div class="member-contact">Email: {email}</div>'
+        email_html = f'\\n{indent}              <div class="member-contact">{email}</div>'
 
-    return "\n".join(
+    return "\\n".join(
         [
-            f'{indent}<div class="member-card">',
-            f'{indent}  <div class="{photo_class}">',
-            f'{indent}    <img src="{image}" alt="{name}" onerror="{onerror}">',
-            f"{indent}  </div>",
-            f'{indent}  <div class="member-info">',
-            f'{indent}    <div class="member-name">{name}</div>',
-            f'{indent}    <div class="member-title">{title}</div>',
-            f'{indent}    <div class="member-research">{research}</div>{email_html}',
+            f'{indent}<div class="member-card" onclick="this.classList.toggle(\'flipped\')">',
+            f'{indent}  <div class="card-inner">',
+            f'{indent}    <div class="card-front">',
+            f'{indent}      <div class="{photo_class}">',
+            f'{indent}        <img src="{image}" alt="{name}" onerror="{onerror}">',
+            f"{indent}      </div>",
+            f'{indent}      <div class="front-info">',
+            f'{indent}        <div class="member-name">{name}</div>',
+            f'{indent}        <div class="member-title">{title}</div>',
+            f'{indent}        <div class="flip-hint">Click</div>',
+            f"{indent}      </div>",
+            f"{indent}    </div>",
+            f'{indent}    <div class="card-back">',
+            f'{indent}      <div class="back-name">{name}</div>',
+            f'{indent}      <div class="member-research">{research}</div>{email_html}',
+            f'{indent}      <div class="back-hint">Back</div>',
+            f"{indent}    </div>",
             f"{indent}  </div>",
             f"{indent}</div>",
         ]

@@ -6,876 +6,313 @@
     <meta name="keywords" content="广东第二师范学院深度视觉实验室, 科研成果, 论文发表">
     <meta name="description" content="广东第二师范学院深度视觉实验室科研成果与论文发表">
     <title>科研成果 - 广东第二师范学院深度视觉实验室</title>
-    
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/style.css" />
-    
-    <!-- === START: 关键样式修改 (与 index.html 同步) === -->
+
     <style>
-      /* === 全新页眉布局 (单行) === */
-      .main-header {
-        display: flex;
-        align-items: center;
-        /* 在电脑上，元素之间留出空间 */
-        justify-content: space-between; 
-        
-        /* 限制最大宽度并居中 */
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        
-        border-bottom: 1px solid #eee;
-        background-color: #fff;
-      }
-      
-      /* 1 & 2. 左侧的 Logo 组 */
-      .header-logo-cluster {
-        display: flex;
-        align-items: center;
-        gap: 18px; /* *** 缩小间距 *** */
-      }
-      .main-header .logo-university {
-        /* *** 在这里调试大小 *** */
-        height: 60px; /* *** 120px / 2 = 60px *** */
-        width: auto;
-      }
-      .main-header .logo-school {
-        /* *** 在这里调试大小 *** */
-        height: 53px; /* *** 105px / 2 = 52.5px *** */
-        width: auto;
-      }
+      /* === 科研成果专属 === */
 
-      /* 3. 中间的导航链接 */
-      .main-header nav {
-        display: flex; /* 电脑上显示 */
-        justify-content: center;
-        gap: 16px;
+      /* 统计数字行 — 不用渐变卡片 */
+      .stats-row {
+        display: flex; gap: 40px; padding: 20px 0;
+        border-bottom: 1px solid var(--border); margin-bottom: 32px;
       }
-      .main-header nav a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 8px 14px;
-        border-radius: 6px;
-      }
-      .main-header nav a:hover,
-      .main-header nav a.active { /* *** 新增 .active 状态 *** */
-        color: #007bff;
-        background-color: #f4f4f4;
-      }
-      
-      /* 4. 右侧的 Lab Logo */
-      .main-header .logo-lab-link {
-        display: inline-block;
-        line-height: 1;
-      }
-      .main-header .logo-lab {
-        /* *** 在这里调试大小 *** */
-        height: 75px; /* *** 150px / 2 = 75px *** */
-        width: auto;
-      }
+      .stat-item { text-align: left; }
+      .stat-number { font-size: 28px; font-weight: 800; color: var(--primary); line-height: 1.2; }
+      .stat-label  { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
 
-      /* 5. 移动端菜单按钮 */
-      .menu-toggle {
-        display: none; /* 电脑上隐藏 */
-        background: #fff;
-        border: 1px solid #ddd;
-        padding: 8px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-      .menu-toggle:focus { outline: 2px solid #0d6efd; }
-      
-      /* === 响应式设计：手机上 === */
-      @media (max-width: 900px) {
-        .main-header {
-            /* 在手机上，只显示 Lab Logo (左) 和 汉堡按钮 (右) */
-            justify-content: space-between;
-        }
-        
-        /* 隐藏学校/学院 logo 和电脑版导航 */
-        .main-header .header-logo-cluster,
-        .main-header nav {
-            display: none;
-        }
-        
-        .menu-toggle {
-            display: block; /* 显示汉堡按钮 */
-        }
-        
-        .main-header .logo-lab {
-            height: 40px; /* *** 手机上 logo 保持 40px *** */
-        }
-        
-        /* 当汉堡菜单被点击时，显示导航 */
-        .main-header.nav-open {
-            flex-wrap: wrap; /* 允许换行 */
-        }
-        .main-header.nav-open nav {
-            display: flex;
-            flex-direction: column; /* 垂直堆叠 */
-            width: 100%; /* 占满整行 */
-            align-items: center;
-            gap: 8px;
-            padding-top: 15px; /* 离顶部 logo 有点距离 */
-            order: 3; /* 确保它在 logo 和按钮下面 */
-        }
-      }
-      /* === End: 全新页眉布局 === */
-
-      /* === 全局样式 === */
-      :root {
-        --primary-color: #007bff;
-        --secondary-color: #6c757d;
-        --text-color: #333;
-        --light-gray: #f8f9fa;
-        --border-color: #e0e0e0;
-        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        margin: 0;
-        padding: 0;
-      }
-      
-      /* === 页面标题 === */
-      .page-title {
-        background: #f8f9fa;
-        border-bottom: 1px solid #eee;
-        text-align: center;
-        padding: 30px 20px;
-        margin-bottom: 30px;
-      }
-      
-      .page-title h1 {
-        margin: 0;
-        font-size: 26px;
-        color: #222;
-      }
-      .page-title p {
-        margin: 8px 0 0 0;
-        color: #666;
-      }
-
-      /* === 主体内容 === */
-      .content-section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      
-      /* === 统计信息 === */
-      .stats-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin-bottom: 50px;
-      }
-      
-      .stat-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 30px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: var(--shadow);
-        transition: transform 0.3s ease;
-      }
-      
-      .stat-card:hover {
-        transform: translateY(-5px);
-      }
-      
-      .stat-number {
-        font-size: 3em;
-        font-weight: 700;
-        margin-bottom: 10px;
-      }
-      
-      .stat-label {
-        font-size: 1.1em;
-        opacity: 0.9;
-      }
-
-      /* === 筛选器 === */
+      /* 筛选器 */
       .filter-section {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: var(--shadow);
-        margin-bottom: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        align-items: center;
+        display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 32px;
       }
-      
-      .filter-label {
-        font-weight: 600;
-        color: var(--primary-color);
-      }
-      
+      .filter-label { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-right: 4px; }
       .filter-btn {
-        padding: 8px 20px;
-        border: 2px solid var(--primary-color);
-        background: white;
-        color: var(--primary-color);
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
+        padding: 6px 16px; border-radius: 4px; border: 1px solid var(--border);
+        background: var(--bg-card); color: var(--text-body); cursor: pointer;
+        font-size: 13px; font-weight: 500; transition: all 0.15s;
       }
-      
-      .filter-btn:hover,
-      .filter-btn.active {
-        background: var(--primary-color);
-        color: white;
-      }
+      .filter-btn:hover { border-color: var(--nav-active); color: var(--nav-active); }
+      .filter-btn.active { background: var(--nav-active); color: var(--text-inverse); border-color: var(--nav-active); }
+      .filter-btn.show-all { background: var(--nav-active); color: var(--text-inverse); border-color: var(--nav-active); }
 
-      /* === 论文列表 === */
-      .year-section {
-        margin-bottom: 50px;
-      }
-      
+      /* 年份区域 */
+      .year-section { margin-bottom: 40px; }
       .year-header {
-        font-size: 2em;
-        color: var(--primary-color);
-        border-bottom: 3px solid var(--primary-color);
-        padding-bottom: 10px;
-        margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
+        font-size: 18px; font-weight: 700; color: var(--text-heading);
+        padding-bottom: 10px; margin-bottom: 20px;
+        border-bottom: 2px solid var(--border);
+        display: flex; align-items: baseline; gap: 10px;
       }
-      
       .year-badge {
-        background: var(--primary-color);
-        color: white;
-        padding: 5px 20px;
-        border-radius: 20px;
-        font-size: 0.8em;
+        font-size: 12px; font-weight: 600; color: var(--text-muted);
+        background: var(--bg-page); padding: 2px 10px; border-radius: 3px;
       }
-      
+
+      /* 论文卡片 — 左侧色条 */
       .publication-card {
-        background: white;
-        border-radius: 12px;
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: var(--shadow);
-        transition: all 0.3s ease;
-        border-left: 5px solid var(--primary-color);
+        background: var(--bg-card); border-radius: 4px; padding: 20px 24px;
+        margin-bottom: 12px; border: 1px solid var(--border);
+        border-left: 3px solid var(--nav-active);
+        transition: border-color 0.15s;
       }
-      
-      .publication-card:hover {
-        transform: translateX(5px);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-      }
-      
+      .publication-card:hover { border-color: var(--nav-active); }
+      .publication-card.hidden { display: none; }
+
       .pub-title {
-        font-size: 1.3em;
-        font-weight: 700;
-        color: var(--text-color);
-        margin-bottom: 10px;
-        line-height: 1.4;
+        font-size: 16px; font-weight: 600; color: var(--text-heading);
+        margin-bottom: 6px; line-height: 1.5;
       }
-      
-      .pub-authors {
-        color: var(--secondary-color);
-        margin-bottom: 8px;
-        font-size: 1.05em;
-      }
-      
-      .pub-venue {
-        color: var(--primary-color);
-        font-weight: 600;
-        margin-bottom: 15px;
-        font-size: 1.05em;
-      }
-      
-      .pub-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 15px;
-      }
-      
-      .tag {
-        background: var(--light-gray);
-        padding: 5px 15px;
-        border-radius: 15px;
-        font-size: 0.9em;
-        color: var(--secondary-color);
-        border: 1px solid var(--border-color);
-      }
-      
-      .tag.highlight {
-        background: #fff3cd;
-        border-color: #ffc107;
-        color: #856404;
-        font-weight: 600;
-      }
-      
-      .pub-links {
-        margin-top: 15px;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      
+      .pub-authors { font-size: 14px; color: var(--text-body); margin-bottom: 4px; }
+      .pub-venue   { font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 10px; }
+
+      .pub-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+      .pub-links { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
       .pub-link {
-        display: inline-block;
-        padding: 6px 15px;
-        background: var(--primary-color);
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 0.9em;
-        transition: all 0.3s ease;
+        display: inline-block; padding: 4px 12px; border-radius: 3px;
+        font-size: 12px; font-weight: 600; text-decoration: none; transition: all 0.15s;
+        background: var(--nav-active); color: var(--text-inverse);
       }
-      
-      .pub-link:hover {
-        background: #0056b3;
-        transform: translateY(-2px);
-      }
-      
-      .pub-link.pdf {
-        background: #dc3545;
-      }
-      
-      .pub-link.pdf:hover {
-        background: #c82333;
-      }
-      
-      .pub-link.code {
-        background: #28a745;
-      }
-      
-      .pub-link.code:hover {
-        background: #218838;
-      }
+      .pub-link:hover { background: var(--nav-active-hover); }
+      .pub-link.pdf  { background: var(--accent-light); color: var(--text-body); }
+      .pub-link.pdf:hover  { background: var(--nav-active); color: var(--text-inverse); }
+      .pub-link.code { background: var(--nav-active); }
+      .pub-link.code:hover { background: var(--nav-active-hover); }
 
-      /* === 奖项与荣誉 === */
-      .awards-section {
-        background: white;
-        border-radius: 15px;
-        padding: 40px;
-        margin: 50px 0;
-        box-shadow: var(--shadow);
-      }
-      
+      /* 奖项 & 项目 */
+      .awards-section { margin: 48px 0; }
       .awards-section h2 {
-        color: var(--primary-color);
-        border-bottom: 3px solid var(--primary-color);
-        padding-bottom: 15px;
-        margin-bottom: 30px;
+        font-size: 18px; font-weight: 700; color: var(--text-heading);
+        padding-bottom: 10px; margin-bottom: 20px;
+        border-bottom: 2px solid var(--border);
       }
-      
       .award-item {
-        padding: 20px;
-        margin-bottom: 15px;
-        background: var(--light-gray);
-        border-radius: 10px;
-        border-left: 4px solid #ffc107;
-        transition: all 0.3s ease;
+        padding: 14px 18px; margin-bottom: 8px;
+        background: var(--bg-card); border-radius: 4px;
+        border: 1px solid var(--border); border-left: 3px solid var(--accent);
       }
-      
-      .award-item:hover {
-        background: white;
-        box-shadow: var(--shadow);
-        transform: translateX(5px);
-      }
-      
-      .award-title {
-        font-weight: 700;
-        font-size: 1.2em;
-        color: var(--text-color);
-        margin-bottom: 8px;
-      }
-      
-      .award-details {
-        color: var(--secondary-color);
-        font-size: 1em;
-      }
+      .award-title   { font-size: 15px; font-weight: 600; color: var(--text-heading); margin-bottom: 4px; }
+      .award-details { font-size: 13px; color: var(--text-muted); }
 
-      /* === 页脚样式 === */
-      .main-footer {
-        background-color: #333;
-        color: #ccc;
-        padding: 20px 0;
-        margin-top: 60px;
-      }
-      
-      .main-footer .footer-content {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto 20px;
-        padding: 20px;
-        flex-wrap: wrap;
-        gap: 30px;
-      }
-      
-      .main-footer .logo-university-footer {
-        width: 100%;
-        max-width: clamp(200px, 32vw, 380px);
-        height: auto;
-      }
-      
-      .main-footer address {
-        font-size: 15px;
-        font-style: normal;
-        line-height: 1.8;
-      }
-      
-      .main-footer a {
-        color: #fff;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-      
-      .main-footer a:hover {
-        color: #5dade2;
-        text-decoration: underline;
-      }
-      
-      .footer-bottom {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: #95a5a6;
-        font-size: 14px;
-      }
-      
-      /* === 响应式设计 === */
       @media (max-width: 768px) {
-        .stats-section {
-          grid-template-columns: 1fr;
-        }
-        
-        .filter-section {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        
-        .main-footer .footer-content {
-          flex-direction: column;
-          text-align: center;
-        }
+        .stats-row { gap: 24px; }
+        .filter-section { gap: 6px; }
+        .filter-btn { padding: 5px 12px; font-size: 12px; }
+        .publication-card { padding: 16px; }
+        .pub-links { flex-direction: column; }
+        .pub-link { text-align: center; }
       }
-      @media (max-width: 900px) {
-        /* (媒体查询里已包含 .menu-toggle 和 nav-open 的样式) */
-      }
+    
+      .watermark::before { opacity: 0.07; }
     </style>
   </head>
   <body>
-    <a class="skip-link" href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">跳到主要内容</a>
-    
-    <!-- === START: 全新的页眉 (Header) === -->
-    <header class="main-header">
-        
-        <!-- 1 & 2. 左侧的 Logo 组 -->
-        <div class="header-logo-cluster">
-            <!-- 1. 学校 Logo (黑字, png) -->
-            <img src="images/black logo.png" 
-                 alt="广东第二师范学院" 
-                 class="logo-university"
-                 onerror="this.src='https://placehold.co/320x80/f8f8f8/666?text=University+Logo'; this.onerror=null;">
-                 
-            <!-- 2. 学院 Logo (sch logo) -->
-            <img src="images/sch logo.png" 
-                 alt="学院Logo" 
-                 class="logo-school"
-                 onerror="this.src='https://placehold.co/140x80/f8f8f8/666?text=School+Logo'; this.onerror=null;">
-        </div>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-        <!-- 3. 中间的导航链接 -->
+    <header class="main-header">
         <nav aria-label="主导航">
             <a href="index.html">主页</a>
             <a href="research.html">研究方向</a>
             <a href="people.html">团队成员</a>
-            <!-- *** 修改：给“科研成果”添加 active 类 *** -->
             <a href="publications.html" class="active" aria-current="page">科研成果</a>
             <a href="news.html">新闻动态</a>
         </nav>
-
-        <!-- 4. 右侧的 Lab Logo (jpg) -->
-        <a href="index.html" class="logo-lab-link">
-          <img src="images/logo.jpg" 
-               alt="实验室Logo" 
-               class="logo-lab"
-               onerror="this.src='https://placehold.co/200x100/f8f8f8/666?text=Lab+Logo'; this.onerror=null;">
-        </a>
-        
-        <!-- 5. 移动端菜单按钮 -->
         <button class="menu-toggle" aria-label="展开或收起导航">☰</button>
-
     </header>
-    <!-- === END: 全新的页眉 === -->
 
-    <!-- === 页面标题 === -->
-    <section class="page-title">
-      <h1 style="margin:0;font-size:26px;color:#222;">📚 科研成果</h1>
-      <p style="margin:8px 0 0 0;color:#666;">Publications & Achievements</p>
+    <section class="page-title watermark">
+      <h1>科研成果</h1>
+      <p>Publications &amp; Achievements</p>
     </section>
 
-    <!-- === 主体内容 === -->
     <div class="content-section" id="main-content">
-      
-      <!-- 统计信息 -->
-      <div class="stats-section">
-        <div class="stat-card">
-          <div class="stat-number">8</div>
-          <div class="stat-label">发表论文</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">6</div>
-          <div class="stat-label">科研项目</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">4</div>
-          <div class="stat-label">获奖成果</div>
-        </div>
+
+      <!-- 统计 — 数字行 -->
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">发表论文</div></div>
+        <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">科研项目</div></div>
+        <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">获奖成果</div></div>
       </div>
 
-      <!-- 2026年论文 -->
-      <div class="year-section">
-        <h2 class="year-header">
-          <span>2026</span>
-          <span class="year-badge">3篇</span>
-        </h2>
+      <!-- 筛选器 -->
+      <div class="filter-section">
+        <span class="filter-label">筛选</span>
+        <button class="filter-btn show-all active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="SCI">SCI 期刊</button>
+        <button class="filter-btn" data-filter="IEEE">IEEE 会议</button>
+        <button class="filter-btn" data-filter="EI">EI 会议</button>
+        <button class="filter-btn" data-filter="ICIPAI">ICIPAI</button>
+      </div>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            GLEAM: Mitigating Barren Plateaus in Hybrid Quantum Machine Learning via Small-World Entanglement
-          </div>
-          <div class="pub-authors">
-            Zhaoxuan Ding, Fengchuang Xing, Yu Xia, Peiyuan Zeng
-          </div>
-          <div class="pub-venue">
-            Accepted by ICIPAI 2026
-          </div>
+      <!-- 2026 -->
+      <div class="year-section">
+        <h2 class="year-header"><span>2026</span><span class="year-badge">3 篇</span></h2>
+
+        <div class="publication-card" data-tags="ICIPAI">
+          <div class="pub-title">GLEAM: Mitigating Barren Plateaus in Hybrid Quantum Machine Learning via Small-World Entanglement</div>
+          <div class="pub-authors">Zhaoxuan Ding, Fengchuang Xing, Yu Xia, Peiyuan Zeng</div>
+          <div class="pub-venue">Accepted by ICIPAI 2026</div>
           <div class="pub-tags">
-            <span class="tag">Hybrid Quantum Machine Learning</span>
+            <span class="tag">Hybrid Quantum ML</span>
             <span class="tag">Small-World Entanglement</span>
           </div>
         </div>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            Kinematic Smoothness Regularization for Action Chunking in Real-World Robotic Manipulation
-          </div>
-          <div class="pub-authors">
-            Shiming Wu, Fengchuang Xing
-          </div>
-          <div class="pub-venue">
-            EI 会议, 2026
-          </div>
-          <div class="pub-tags">
-            <span class="tag">机器人操作</span>
-            <span class="tag">动作分块</span>
-          </div>
+        <div class="publication-card" data-tags="EI">
+          <div class="pub-title">Kinematic Smoothness Regularization for Action Chunking in Real-World Robotic Manipulation</div>
+          <div class="pub-authors">Shiming Wu, Fengchuang Xing</div>
+          <div class="pub-venue">EI 会议, 2026</div>
+          <div class="pub-tags"><span class="tag">机器人操作</span><span class="tag">动作分块</span></div>
         </div>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            SMJ-ACT: Chunk-Aware Stable Minimum-Jerk Execution Refinement for ACT Policies
-          </div>
-          <div class="pub-authors">
-            Shiming Wu, Fengchuang Xing
-          </div>
-          <div class="pub-venue">
-            EI 会议, 2026
-          </div>
-          <div class="pub-tags">
-            <span class="tag">机器人操作</span>
-            <span class="tag">ACT策略</span>
-          </div>
+        <div class="publication-card" data-tags="EI">
+          <div class="pub-title">SMJ-ACT: Chunk-Aware Stable Minimum-Jerk Execution Refinement for ACT Policies</div>
+          <div class="pub-authors">Shiming Wu, Fengchuang Xing</div>
+          <div class="pub-venue">EI 会议, 2026</div>
+          <div class="pub-tags"><span class="tag">机器人操作</span><span class="tag">ACT策略</span></div>
         </div>
       </div>
 
-      <!-- 2025年论文 -->
+      <!-- 2025 -->
       <div class="year-section">
-        <h2 class="year-header">
-          <span>2025</span>
-          <span class="year-badge">3篇</span>
-        </h2>
+        <h2 class="year-header"><span>2025</span><span class="year-badge">3 篇</span></h2>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            CLIPVQA: Video Quality Assessment via CLIP
-          </div>
-          <div class="pub-authors">
-            Fengchuang Xing, Mingjie Li, Yuan-Gen Wang, Guopu Zhu, Xiaochun Cao
-          </div>
-          <div class="pub-venue">
-            IEEE Transactions on Broadcasting, 2025
-          </div>
+        <div class="publication-card" data-tags="SCI">
+          <div class="pub-title">CLIPVQA: Video Quality Assessment via CLIP</div>
+          <div class="pub-authors">Fengchuang Xing, Mingjie Li, Yuan-Gen Wang, Guopu Zhu, Xiaochun Cao</div>
+          <div class="pub-venue">IEEE Transactions on Broadcasting, 2025</div>
           <div class="pub-tags">
             <span class="tag highlight">SCI 一区</span>
-            <span class="tag">视频质量评估</span>
-            <span class="tag">深度学习</span>
+            <span class="tag">视频质量评估</span><span class="tag">深度学习</span>
           </div>
-          <div class="pub-links">
-            <a href="#" class="pub-link">DOI Link</a>
-          </div>
+          <div class="pub-links"><a href="#" class="pub-link">DOI</a></div>
         </div>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            Efficient Teacher Behavior Analysis via Adaptive Frame Sampling
-          </div>
-          <div class="pub-authors">
-            Peiyuan Zeng, Yuhuang Zheng
-          </div>
-          <div class="pub-venue">
-            2025 International Conference on Computational Intelligence and Robotics (CIR)
-          </div>
-          <div class="pub-tags">
-            <span class="tag">IEEE 会议</span>
-            <span class="tag">教师行为分析</span>
-            <span class="tag">自适应采样</span>
-          </div>
-          <div class="pub-links">
-            <a href="#" class="pub-link">IEEE Xplore</a>
-          </div>
+        <div class="publication-card" data-tags="IEEE">
+          <div class="pub-title">Efficient Teacher Behavior Analysis via Adaptive Frame Sampling</div>
+          <div class="pub-authors">Peiyuan Zeng, Yuhuang Zheng</div>
+          <div class="pub-venue">CIR 2025</div>
+          <div class="pub-tags"><span class="tag">IEEE 会议</span><span class="tag">教师行为分析</span></div>
+          <div class="pub-links"><a href="#" class="pub-link">IEEE Xplore</a></div>
         </div>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            High-Accuracy Classification of Fertilized Eggs Using Mamba-Based Model
-          </div>
-          <div class="pub-authors">
-            Peiyuan Zeng, Jiaqi Chen, Hongwei Yue, Fengchuang Xing, Shiming Wu, Shihang Huang, Linting Yang
-          </div>
-          <div class="pub-venue">
-            2025 6th International Conference on Artificial Intelligence and Electromechanical Automation (AIEA)
-          </div>
-          <div class="pub-tags">
-            <span class="tag">IEEE 会议</span>
-            <span class="tag">受精卵分类</span>
-            <span class="tag">Mamba 模型</span>
-          </div>
-          <div class="pub-links">
-            <a href="#" class="pub-link">IEEE Xplore</a>
-          </div>
+        <div class="publication-card" data-tags="IEEE">
+          <div class="pub-title">High-Accuracy Classification of Fertilized Eggs Using Mamba-Based Model</div>
+          <div class="pub-authors">Peiyuan Zeng, Jiaqi Chen, Hongwei Yue, Fengchuang Xing, Shiming Wu, Shihang Huang, Linting Yang</div>
+          <div class="pub-venue">AIEA 2025</div>
+          <div class="pub-tags"><span class="tag">IEEE 会议</span><span class="tag">受精卵分类</span><span class="tag">Mamba</span></div>
+          <div class="pub-links"><a href="#" class="pub-link">IEEE Xplore</a></div>
         </div>
       </div>
 
-      <!-- 2024年论文 -->
+      <!-- 2024 -->
       <div class="year-section">
-        <h2 class="year-header">
-          <span>2024</span>
-          <span class="year-badge">2篇</span>
-        </h2>
+        <h2 class="year-header"><span>2024</span><span class="year-badge">2 篇</span></h2>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            CoSTA: Co-training Spatial-Temporal Attention for Blind Video Quality Assessment
-          </div>
-          <div class="pub-authors">
-            Fengchuang Xing, Yuan-Gen Wang, Weixuan Tang, Guopu Zhu, Sam Kwong
-          </div>
-          <div class="pub-venue">
-            Expert Systems with Applications, Vol. 255, 2024
-          </div>
+        <div class="publication-card" data-tags="SCI">
+          <div class="pub-title">CoSTA: Co-training Spatial-Temporal Attention for Blind Video Quality Assessment</div>
+          <div class="pub-authors">Fengchuang Xing, Yuan-Gen Wang, Weixuan Tang, Guopu Zhu, Sam Kwong</div>
+          <div class="pub-venue">Expert Systems with Applications, Vol. 255, 2024</div>
           <div class="pub-tags">
             <span class="tag highlight">SCI 一区 TOP</span>
-            <span class="tag">视频质量评估</span>
-            <span class="tag">时空注意力</span>
+            <span class="tag">视频质量评估</span><span class="tag">时空注意力</span>
           </div>
-          <div class="pub-links">
-            <a href="#" class="pub-link">DOI Link</a>
-          </div>
+          <div class="pub-links"><a href="#" class="pub-link">DOI</a></div>
         </div>
 
-        <div class="publication-card">
-          <div class="pub-title">
-            FRRffusion: Unveiling Authenticity with Diffusion-Based Face Retouching Reversal
-          </div>
-          <div class="pub-authors">
-            Fengchuang Xing, Xiaowen Shi, Yuan-Gen Wang, Chunsheng Yang
-          </div>
-          <div class="pub-venue">
-            arXiv preprint arXiv:2405.07582, 2024
-          </div>
-          <div class="pub-tags">
-            <span class="tag">扩散模型</span>
-            <span class="tag">人脸修复</span>
-            <span class="tag">预印本</span>
-          </div>
-          <div class="pub-links">
-            <a href="#" class="pub-link">arXiv Paper</a>
-          </div>
+        <div class="publication-card" data-tags="">
+          <div class="pub-title">FRRffusion: Unveiling Authenticity with Diffusion-Based Face Retouching Reversal</div>
+          <div class="pub-authors">Fengchuang Xing, Xiaowen Shi, Yuan-Gen Wang, Chunsheng Yang</div>
+          <div class="pub-venue">arXiv:2405.07582, 2024</div>
+          <div class="pub-tags"><span class="tag">扩散模型</span><span class="tag">人脸修复</span></div>
+          <div class="pub-links"><a href="#" class="pub-link">arXiv</a></div>
         </div>
       </div>
 
-      <!-- 奖项与荣誉 -->
+      <!-- 奖项 -->
       <div class="awards-section">
         <h2>奖项与荣誉</h2>
-
-        <div class="award-item">
-          <div class="award-title">
-            2026年广东省挑战杯省级铜奖
-          </div>
-          <div class="award-details">
-            项目名称：视源科技-面向AI时代的真实人脸恢复解决方案
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            广东省工科大赛学生实验综合技能竞赛一等奖
-          </div>
-          <div class="award-details">
-            获奖时间：2025年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            广州市荔湾区第三届创新创业大赛优胜奖
-          </div>
-          <div class="award-details">
-            获奖时间：2025年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            2025年世界职业院校技能大赛广东赛区人工智能赛道第四名
-          </div>
-          <div class="award-details">
-            获奖时间：2025年
-          </div>
-        </div>
+        <div class="award-item"><div class="award-title">2026 年广东省挑战杯省级铜奖</div><div class="award-details">视源科技 — 面向 AI 时代的真实人脸恢复解决方案</div></div>
+        <div class="award-item"><div class="award-title">广东省工科大赛学生实验综合技能竞赛一等奖</div><div class="award-details">2025</div></div>
+        <div class="award-item"><div class="award-title">广州市荔湾区第三届创新创业大赛优胜奖</div><div class="award-details">2025</div></div>
+        <div class="award-item"><div class="award-title">世界职业院校技能大赛广东赛区 AI 赛道第四名</div><div class="award-details">2025</div></div>
       </div>
 
-      <!-- 科研项目 -->
+      <!-- 项目 -->
       <div class="awards-section">
         <h2>科研项目</h2>
-
-        <div class="award-item">
-          <div class="award-title">
-            企业合作项目：基于 diffusion-mamba 的视频图像美颜
-          </div>
-          <div class="award-details">
-            合作企业：深圳昊科达电子有限公司 | 经费：40万元 | 2025年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            国家级大学生创新创业计划项目
-          </div>
-          <div class="award-details">
-            基于深度学习的多模态姿态识别教师教学质量评估系统 | 2025年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            广东第二师范学院创业窝项目：De-Fit 智储箱连
-          </div>
-          <div class="award-details">
-            基于 STC15F2K60S2 的慢性病药物智能药箱 | 2025年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            广东第二师范学院创业窝项目：视源科技-面向AI时代的真实人脸恢复解决方案
-          </div>
-          <div class="award-details">
-            基于扩散模型与深度学习的真实人脸恢复技术 | 2026年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            广东第二师范学院创业窝项目：基于可控视觉触发与SSVEP的轻量化脑机交互控制系统
-          </div>
-          <div class="award-details">
-            脑机接口与视觉AI交叉应用 | 2026年
-          </div>
-        </div>
-
-        <div class="award-item">
-          <div class="award-title">
-            广东第二师范学院创业窝项目：基于视觉AI的办公区域智能照明控制系统
-          </div>
-          <div class="award-details">
-            人体存在检测 + 轨迹预判节能方案 | 2026年
-          </div>
-        </div>
+        <div class="award-item"><div class="award-title">基于 diffusion-mamba 的视频图像美颜</div><div class="award-details">深圳昊科达电子 · 40 万元 · 2025</div></div>
+        <div class="award-item"><div class="award-title">国家级大学生创新创业计划项目</div><div class="award-details">基于深度学习的多模态姿态识别教师教学质量评估系统 · 2025</div></div>
+        <div class="award-item"><div class="award-title">De-Fit 智储箱连</div><div class="award-details">基于 STC15F2K60S2 的慢性病药物智能药箱 · 2025</div></div>
+        <div class="award-item"><div class="award-title">视源科技 — 面向 AI 时代的真实人脸恢复解决方案</div><div class="award-details">扩散模型 + 深度学习 · 2026</div></div>
+        <div class="award-item"><div class="award-title">基于可控视觉触发与 SSVEP 的轻量化脑机交互控制系统</div><div class="award-details">脑机接口 + 视觉 AI · 2026</div></div>
+        <div class="award-item"><div class="award-title">基于视觉 AI 的办公区域智能照明控制系统</div><div class="award-details">人体存在检测 + 轨迹预判节能 · 2026</div></div>
       </div>
-      
+
     </div>
 
-    <!-- === 页脚 === -->
     <footer class="main-footer">
         <div class="footer-content">
-            <div>
-              <img src="images/white logo.png" 
-                   alt="广东第二师范学院" 
-                   class="logo-university-footer"
-                   onerror="this.src='https://placehold.co/350x60/555/ccc?text=University+Logo'; this.onerror=null;">
-            </div>
-            
+            <img src="images/white logo.png" alt="广东第二师范学院" class="logo-university-footer"
+                 onerror="this.src='https://placehold.co/350x60/555/ccc?text=University+Logo'; this.onerror=null;">
             <address>
-              <strong>📍 联系地址</strong><br>
+              <strong style="color: var(--footer-text);">联系地址</strong><br>
               广东第二师范学院 海珠校区<br>
               物理与信息工程学院<br>
               深度视觉实验室
             </address>
-            
             <address>
-              <strong>📧 联系方式</strong><br>
-              Email: xingfengchuang@gdei.edu.cn<br>
+              <strong style="color: var(--footer-text);">联系方式</strong><br>
+              xingfengchuang@gdei.edu.cn<br>
               <a href="https://www.gdei.edu.cn/" target="_blank">学校官网</a>
             </address>
         </div>
         <div class="footer-bottom">
-          Copyright © <span id="copyright-year">2025</span> 深度视觉实验室 | 
+          Copyright &copy; <span id="copyright-year">2025</span> 深度视觉实验室 ·
           <a href="https://www.gdei.edu.cn/" target="_blank">广东第二师范学院</a>
         </div>
     </footer>
-    
+
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      try {
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
-      } catch (e) {
-        console.error("无法自动更新年份:", e);
-      }
-      
-      // 简单的筛选功能
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          // 这里可以添加实际的筛选逻辑
-        });
-      });
+    <script src="js/common.js?v=footer-reveal"></script>
+    <script>
+      try { document.getElementById('copyright-year').textContent = new Date().getFullYear(); } catch (e) {}
       (function () {
-        try {
-          var toggle = document.querySelector('.main-header .menu-toggle');
-          var header = document.querySelector('.main-header');
-          if (toggle && header) {
-            toggle.addEventListener('click', function () {
-              header.classList.toggle('nav-open');
+        var t = document.querySelector('.main-header .menu-toggle');
+        var h = document.querySelector('.main-header');
+        if (t && h) t.addEventListener('click', function () { h.classList.toggle('nav-open'); });
+      })();
+
+      // 筛选器
+      (function () {
+        var btns = document.querySelectorAll('.filter-btn');
+        var cards = document.querySelectorAll('.publication-card');
+        var sections = document.querySelectorAll('.year-section');
+
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            btns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.dataset.filter;
+
+            sections.forEach(function (section) {
+              var sc = section.querySelectorAll('.publication-card');
+              var vis = 0;
+              sc.forEach(function (card) {
+                if (filter === 'all' || card.dataset.tags.indexOf(filter) !== -1) {
+                  card.classList.remove('hidden'); vis++;
+                } else {
+                  card.classList.add('hidden');
+                }
+              });
+              section.style.display = vis === 0 ? 'none' : '';
             });
-          }
-        } catch (e) { console.error(e); }
+          });
+        });
       })();
     </script>
-    
   </body>
 </html>
-

@@ -5,119 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>团队成员 - 广东第二师范学院深度视觉实验室</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/style.css" />
     <style>
-      :root { --primary-color: #007bff; --secondary-color: #6c757d; --text-color: #333; --light-gray: #f8f9fa; --border-color: #e0e0e0; --shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; padding: 0; }
-      
-      /* === START: 全新页眉布局 (移植自 index.html) === */
-      .main-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; 
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        border-bottom: 1px solid #eee;
-        background-color: #fff;
+      /* === 团队成员专属 === */
+
+      .section-header {
+        margin-top: 40px; margin-bottom: 24px;
+        padding-bottom: 10px; border-bottom: 2px solid var(--border);
       }
-      
-      .header-logo-cluster { display: flex; align-items: center; gap: 18px; }
-      .main-header .logo-university { height: 60px; width: auto; }
-      .main-header .logo-school { height: 53px; width: auto; }
+      .section-header h2 { font-size: 18px; font-weight: 700; margin: 0; color: var(--text-heading); }
 
-      .main-header nav { display: flex; justify-content: center; gap: 16px; padding-top: 0; }
-      .main-header nav a { text-decoration: none; color: #333; font-weight: 600; font-size: 16px; padding: 8px 14px; border-radius: 6px; }
-      .main-header nav a:hover,
-      .main-header nav a.active { color: #007bff; background-color: #f4f4f4; }
-      
-      .main-header .logo-lab-link { display: inline-block; line-height: 1; }
-      .main-header .logo-lab { height: 75px; width: auto; }
-
-      .menu-toggle { display: none; background: #fff; border: 1px solid #ddd; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
-      .menu-toggle:focus { outline: 2px solid #0d6efd; }
-      
-      @media (max-width: 900px) {
-        .main-header { justify-content: space-between; }
-        .main-header .header-logo-cluster, .main-header nav { display: none; }
-        .menu-toggle { display: block; }
-        .main-header .logo-lab { height: 40px; }
-        .main-header.nav-open { flex-wrap: wrap; }
-        .main-header.nav-open nav { display: flex; flex-direction: column; width: 100%; align-items: center; gap: 8px; padding-top: 15px; order: 3; }
-      }
-      /* === END: 全新页眉布局 === */
-
-      .page-title { background: #f8f9fa; border-bottom: 1px solid #eee; text-align: center; padding: 30px 20px; margin-bottom: 30px; }
-      .page-title h1 { margin: 0; font-size: 26px; color: #222; }
-      .page-title p { margin: 8px 0 0 0; color: #666; }
-      .content-section { max-width: 1200px; margin: 0 auto; padding: 20px; }
-      .section-header { margin-bottom: 30px; padding-bottom: 15px; border-bottom: 3px solid var(--primary-color); }
-      .section-header h2 { color: var(--primary-color); font-size: 2em; margin: 0; }
-      
-      /* === 修复排版与图片尺寸 (Grid布局 + 固定证件照大小) === */
-      .member-grid { 
-        display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-        gap: 30px; 
-        margin: 40px 0; 
+      /* 成员网格 */
+      .member-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
       }
 
-      .member-card { 
-        background: white; 
-        border-radius: 12px; 
-        overflow: hidden; 
-        box-shadow: var(--shadow); 
-        transition: all 0.3s ease; 
-        display: flex; 
-        flex-direction: column; 
-        height: 100%; 
+      /* === 翻转卡片 === */
+      .member-card {
+        perspective: 1000px; cursor: pointer;
+        min-height: 380px;
       }
-      .member-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+      .card-inner {
+        position: relative; width: 100%; height: 100%;
+        transition: transform 0.5s ease;
+        transform-style: preserve-3d;
+      }
+      .member-card.flipped .card-inner { transform: rotateY(180deg); }
 
-      .member-photo { 
-        width: 100%; 
-        height: 240px; /* 背景区域高度 */
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        overflow: hidden; 
+      .card-front, .card-back {
+        position: absolute; inset: 0;
+        backface-visibility: hidden;
+        border-radius: 6px; border: 1px solid var(--border);
+        background: var(--bg-card); overflow: hidden;
+        display: flex; flex-direction: column;
+      }
+      .card-front .front-body { flex: 1; }
+      .card-front .flip-hint {
+        font-size: 11px; color: var(--text-muted);
+        text-align: center; padding: 8px;
+        border-top: 1px solid var(--border);
+        opacity: 0; transition: opacity 0.2s;
+      }
+      .card-back {
+        transform: rotateY(180deg);
+        padding: 24px 20px;
       }
 
-      .member-photo img { 
-        width: 150px; /* 固定宽度 */
-        height: 200px; /* 固定高度 */
-        object-fit: cover; 
-        object-position: top center; 
-        border-radius: 6px; 
-        border: 3px solid rgba(255, 255, 255, 0.8); 
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+      /* 正面 — 照片 + 姓名 + 头衔 */
+      .card-front .member-photo {
+        width: 100%; height: 220px;
+        background: var(--primary-light);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
       }
-      
-      .member-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-      .member-name { font-size: 1.5em; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
-      .member-title { font-size: 1em; color: var(--secondary-color); font-weight: 600; margin-bottom: 15px; }
-      .member-research { font-size: 0.95em; color: #666; margin-bottom: 15px; flex-grow: 1; }
-      .member-contact { font-size: 0.9em; color: #888; border-top: 1px solid var(--border-color); padding-top: 10px; }
-      
-      /* 页脚 */
-      .main-footer { background-color: #333; color: #ccc; padding: 20px 0; margin-top: 60px; }
-      .main-footer .footer-content { display: flex; justify-content: space-around; align-items: center; max-width: 1200px; margin: 0 auto; padding: 10px 20px; flex-wrap: wrap; gap: 16px; }
-      .main-footer .logo-university-footer { width: 100%; max-width: clamp(200px, 32vw, 380px); height: auto; filter: brightness(0) invert(1); opacity: 0.9; }
-      .main-footer address { font-size: 14px; font-style: normal; }
-      .main-footer a { color: #fff; text-decoration: none; }
-      .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 14px; }
+      .card-front .member-photo img {
+        width: 150px; height: 200px;
+        object-fit: cover; object-position: top center;
+        border-radius: 4px;
+      }
+      .card-front .front-info { padding: 16px 18px; text-align: center; }
+      .card-front .member-name  { font-size: 17px; font-weight: 700; color: var(--text-heading); margin-bottom: 4px; }
+      .card-front .member-title { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+      .member-card:hover .card-front .flip-hint { opacity: 1; }
+
+      /* 背面 — 研究介绍 + 邮箱 */
+      .card-back .back-name {
+        font-size: 18px; font-weight: 700; color: var(--text-heading);
+        margin-bottom: 16px; padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .card-back .member-research {
+        font-size: 14px; color: var(--text-body); line-height: 1.7;
+        flex-grow: 1; margin-bottom: 16px;
+      }
+      .card-back .member-contact {
+        font-size: 12px; color: var(--text-muted);
+        border-top: 1px solid var(--border); padding-top: 12px;
+      }
+      .card-back .back-hint {
+        margin-top: 12px; font-size: 11px; color: var(--primary);
+        text-align: center;
+      }
+
+      /* 加入我们 */
+      #join-us {
+        background: var(--primary-light); padding: 36px 32px;
+        margin-top: 48px; border-radius: 6px;
+        border-left: 3px solid var(--nav-active);
+      }
+      #join-us h2 { font-size: 18px; margin: 0 0 8px; }
+      #join-us p  { font-size: 15px; color: var(--text-body); margin: 0 0 8px; line-height: 1.7; }
+      #join-us strong { color: var(--primary); }
+
+      @media (max-width: 768px) {
+        .member-card { min-height: 340px; }
+      }
     </style>
   </head>
   <body>
-    
+
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
     <header class="main-header">
-        <div class="header-logo-cluster">
-            <img src="images/black logo.png" alt="广东第二师范学院" class="logo-university" onerror="this.src='https://placehold.co/320x80/f8f8f8/666?text=University+Logo';">
-            <img src="images/sch logo.png" alt="学院Logo" class="logo-school" onerror="this.src='https://placehold.co/140x80/f8f8f8/666?text=School+Logo';">
-        </div>
         <nav aria-label="主导航">
             <a href="index.html">主页</a>
             <a href="research.html">研究方向</a>
@@ -125,236 +118,399 @@
             <a href="publications.html">科研成果</a>
             <a href="news.html">新闻动态</a>
         </nav>
-        <a href="index.html" class="logo-lab-link">
-          <img src="images/logo.jpg" alt="实验室Logo" class="logo-lab" onerror="this.src='https://placehold.co/200x100/f8f8f8/666?text=Lab+Logo';">
-        </a>
         <button class="menu-toggle" aria-label="展开或收起导航">☰</button>
     </header>
 
-    <section class="page-title">
-      <h1>👥 团队成员</h1>
-      <p>Our Team Members</p>
+    <section class="page-title watermark">
+      <h1>团队成员</h1>
+      <p>Our Team</p>
     </section>
 
-    <div class="content-section">
-      
-      <div class="section-header">
-        <h2>👨‍🏫 教师团队</h2>
-      </div>
-      
+    <div class="content-section" id="main-content">
+
+      <div class="section-header"><h2>教师团队</h2></div>
+
             <!-- AUTO_TEACHERS_START -->
       <div class="member-grid">
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/t-yhw.png" alt="岳洪伟" onerror="this.style.display='none';this.parentNode.innerText='👨‍🏫'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/t-yhw.png" alt="岳洪伟" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>👨‍🏫</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">岳洪伟</div>
-            <div class="member-title">广东工业大学控制科学与工程博士</div>
-            <div class="member-research">主要从事机器视觉方向的研究，现就职于广东第二师范学院物流与信息工程学院，共同完成项目开发与运营。</div>
+              <div class="front-info">
+                <div class="member-name">岳洪伟</div>
+                <div class="member-title">广东工业大学控制科学与工程博士</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">岳洪伟</div>
+              <div class="member-research">主要从事机器视觉方向的研究，现就职于广东第二师范学院物流与信息工程学院，共同完成项目开发与运营。</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/t-xfc.png" alt="邢凤闯" onerror="this.style.display='none';this.parentNode.innerText='👨‍🏫'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/t-xfc.png" alt="邢凤闯" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>👨‍🏫</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">邢凤闯</div>
-            <div class="member-title">广州大学计算机博士</div>
-            <div class="member-research">主要从事机器视觉方向的研究，现就职于广东第二师范学院物流与信息工程学院，共同完成项目开发与运营。</div>
+              <div class="front-info">
+                <div class="member-name">邢凤闯</div>
+                <div class="member-title">广州大学计算机博士</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">邢凤闯</div>
+              <div class="member-research">主要从事机器视觉方向的研究，现就职于广东第二师范学院物流与信息工程学院，共同完成项目开发与运营。</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
       </div>
             <!-- AUTO_TEACHERS_END -->
 
-      <div class="section-header">
-        <h2>🎓 学生团队</h2>
-      </div>
-      
+      <div class="section-header"><h2>学生团队</h2></div>
+
             <!-- AUTO_STUDENTS_START -->
       <div class="member-grid">
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-zpy.jpg" alt="曾培源" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-zpy.jpg" alt="曾培源" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">曾培源</div>
-            <div class="member-title">23电子信息工程A班</div>
-            <div class="member-research">新加坡国立大学公费交流访学习（创新管理、人工智能），国家级大创主持人，发表SCI、EI等三篇，国家发明专利一项，软著三项。</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-wsm.jpg" alt="吴世明" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">吴世明</div>
-            <div class="member-title">23电子信息A班</div>
-            <div class="member-research">主要研究方向包括机器人智能控制、深度学习在机器人感知与决策中的应用、嵌入式系统软硬件协同设计，以及无刷电机（BLDC）闭环控制。</div>
-            <div class="member-contact">Email: hotgirlllllllll@outlook.com</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-wbw.jpg" alt="王秉文" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">王秉文</div>
-            <div class="member-title">23电子信息工程A班</div>
-            <div class="member-research">3D建模与打印，信号检测。<br>广东省aelos鸿蒙机器人挑战赛三等奖；3D建模全国高校数字艺术设计大赛未来设计师三等奖；深圳市昊科达电子有限公司实习生；深圳国测电子有限公司实习生。</div>
+              <div class="front-info">
+                <div class="member-name">曾培源</div>
+                <div class="member-title">23电子信息工程A班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">曾培源</div>
+              <div class="member-research">新加坡国立大学公费交流访学习（创新管理、人工智能），国家级大创主持人，发表SCI、EI等三篇，国家发明专利一项，软著三项。</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-wjh.jpg" alt="韦佳慧" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-wsm.jpg" alt="吴世明" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">韦佳慧</div>
-            <div class="member-title">23物理教育A班</div>
-            <div class="member-research">主要参与实验室教学辅助与物理实验数据分析。</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-dzx.jpg" alt="丁兆轩" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">丁兆轩</div>
-            <div class="member-title">24级电子信息工程</div>
-            <div class="member-research">视觉人工智能交互。</div>
-            <div class="member-contact">Email: 3509417485@qq.com</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-phy.jpg" alt="彭海英" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">彭海英</div>
-            <div class="member-title">24电子信息工程专业</div>
-            <div class="member-research">嵌入式设备网络通信，优化低功耗数据传输方案。</div>
-            <div class="member-contact">Email: 728195068@qq.com</div>
+              <div class="front-info">
+                <div class="member-name">吴世明</div>
+                <div class="member-title">23电子信息A班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">吴世明</div>
+              <div class="member-research">主要研究方向包括机器人智能控制、深度学习在机器人感知与决策中的应用、嵌入式系统软硬件协同设计，以及无刷电机（BLDC）闭环控制。</div>
+              <div class="member-contact">hotgirlllllllll@outlook.com</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-lyh.jpg" alt="林雨涵" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-wbw.jpg" alt="王秉文" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">林雨涵</div>
-            <div class="member-title">24电子信息A班</div>
-            <div class="member-research">深度神经网络学习，机器视觉与图像识别实验。</div>
-            <div class="member-contact">Email: 2471810563@qq.com</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-cjq.jpg" alt="陈佳琪" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">陈佳琪</div>
-            <div class="member-title">2022级电子信息工程</div>
-            <div class="member-research">嵌入式与计算机视觉，基于ARM-MCU开发与融合多传感器，研究轻量级AI模型的优化与部署，应用于实时控制与计算机视觉任务。</div>
-            <div class="member-contact">Email: 1706542118@qq.com</div>
+              <div class="front-info">
+                <div class="member-name">王秉文</div>
+                <div class="member-title">23电子信息工程A班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">王秉文</div>
+              <div class="member-research">3D建模与打印，信号检测。<br>广东省aelos鸿蒙机器人挑战赛三等奖；3D建模全国高校数字艺术设计大赛未来设计师三等奖；深圳市昊科达电子有限公司实习生；深圳国测电子有限公司实习生。</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-lwj.jpg" alt="林伟健" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-wjh.jpg" alt="韦佳慧" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">林伟健</div>
-            <div class="member-title">2024级电子信息B班</div>
-            <div class="member-research">大模型记忆与智能体记忆</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-fxj.jpg" alt="方湘杰" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">方湘杰</div>
-            <div class="member-title">2024级物理学D班</div>
-            <div class="member-research">物理信息神经网络<br>全国大学生数学竞赛初赛三等奖</div>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-lqk.jpg" alt="林启坤" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
-          </div>
-          <div class="member-info">
-            <div class="member-name">林启坤</div>
-            <div class="member-title">25级电子信息工程</div>
-            <div class="member-research">基于YOLO的轻量级鱼类检测方法研究</div>
+              <div class="front-info">
+                <div class="member-name">韦佳慧</div>
+                <div class="member-title">23物理教育A班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">韦佳慧</div>
+              <div class="member-research">主要参与实验室教学辅助与物理实验数据分析。</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-lyx.jpg" alt="李宇翔" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-dzx.jpg" alt="丁兆轩" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">李宇翔</div>
-            <div class="member-title">24级电子信息工程</div>
-            <div class="member-research">优化视觉图像处理</div>
+              <div class="front-info">
+                <div class="member-name">丁兆轩</div>
+                <div class="member-title">24级电子信息工程</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">丁兆轩</div>
+              <div class="member-research">视觉人工智能交互。</div>
+              <div class="member-contact">3509417485@qq.com</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <div class="member-photo">
-            <img src="images/s-lrj.jpg" alt="梁锐竣" onerror="this.style.display='none';this.parentNode.innerText='🎓'">
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-phy.jpg" alt="彭海英" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
           </div>
-          <div class="member-info">
-            <div class="member-name">梁锐竣</div>
-            <div class="member-title">24级电子信息工程</div>
-            <div class="member-research">优化视觉图像处理</div>
+              <div class="front-info">
+                <div class="member-name">彭海英</div>
+                <div class="member-title">24电子信息工程专业</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">彭海英</div>
+              <div class="member-research">嵌入式设备网络通信，优化低功耗数据传输方案。</div>
+              <div class="member-contact">728195068@qq.com</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-lyh.jpg" alt="林雨涵" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">林雨涵</div>
+                <div class="member-title">24电子信息A班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">林雨涵</div>
+              <div class="member-research">深度神经网络学习，机器视觉与图像识别实验。</div>
+              <div class="member-contact">2471810563@qq.com</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-cjq.jpg" alt="陈佳琪" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">陈佳琪</div>
+                <div class="member-title">2022级电子信息工程</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">陈佳琪</div>
+              <div class="member-research">嵌入式与计算机视觉，基于ARM-MCU开发与融合多传感器，研究轻量级AI模型的优化与部署，应用于实时控制与计算机视觉任务。</div>
+              <div class="member-contact">1706542118@qq.com</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-lwj.jpg" alt="林伟健" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">林伟健</div>
+                <div class="member-title">2024级电子信息B班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">林伟健</div>
+              <div class="member-research">大模型记忆与智能体记忆</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-fxj.jpg" alt="方湘杰" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">方湘杰</div>
+                <div class="member-title">2024级物理学D班</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">方湘杰</div>
+              <div class="member-research">物理信息神经网络<br>全国大学生数学竞赛初赛三等奖</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-lqk.jpg" alt="林启坤" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">林启坤</div>
+                <div class="member-title">25级电子信息工程</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">林启坤</div>
+              <div class="member-research">基于YOLO的轻量级鱼类检测方法研究</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-lyx.jpg" alt="李宇翔" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">李宇翔</div>
+                <div class="member-title">24级电子信息工程</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">李宇翔</div>
+              <div class="member-research">优化视觉图像处理</div>
+              <div class="back-hint">Back</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-card" onclick="this.classList.toggle('flipped')">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="front-body">
+              <div class="member-photo">
+            <img src="images/s-lrj.jpg" alt="梁锐竣" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=font-size:40px>🎓</span>'">
+          </div>
+              <div class="front-info">
+                <div class="member-name">梁锐竣</div>
+                <div class="member-title">24级电子信息工程</div>
+                              </div>
+              </div>
+              <div class="flip-hint">Click</div>
+            </div>
+            <div class="card-back">
+              <div class="back-name">梁锐竣</div>
+              <div class="member-research">优化视觉图像处理</div>
+              <div class="back-hint">Back</div>
+            </div>
           </div>
         </div>
       </div>
             <!-- AUTO_STUDENTS_END -->
 
-      <div id="join-us" class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; margin-top: 60px; text-align: center; border-radius: 15px;">
-        <h2 style="color: white; border: none;">🚀 加入我们</h2>
-        <p style="font-size: 1.2em;">我们欢迎有志于计算机视觉和人工智能研究的学生加入！<br>实验室常年招收本科生、硕士研究生参与科研项目。</p>
-        <p><strong>联系方式：</strong> xingfengchuang@gdei.edu.cn</p>
+      <div id="join-us">
+        <h2>加入我们</h2>
+        <p>我们欢迎有志于计算机视觉和人工智能研究的学生加入。实验室常年招收本科生、硕士研究生参与科研项目。</p>
+        <p><strong>xingfengchuang@gdei.edu.cn</strong></p>
       </div>
-      
+
     </div>
 
     <footer class="main-footer">
         <div class="footer-content">
             <img src="images/white logo.png" alt="广东第二师范学院" class="logo-university-footer" onerror="this.src='https://placehold.co/350x60/555/ccc?text=University+Logo';">
-            <address><strong>📍 联系地址</strong><br>广东第二师范学院 海珠校区<br>物理与信息工程学院 深度视觉实验室</address>
-            <address><strong>📧 联系方式</strong><br>Email: xingfengchuang@gdei.edu.cn<br><a href="https://www.gdei.edu.cn/" target="_blank">学校官网</a></address>
+            <address>
+              <strong style="color: var(--footer-text);">联系地址</strong><br>
+              广东第二师范学院 海珠校区<br>
+              物理与信息工程学院 深度视觉实验室
+            </address>
+            <address>
+              <strong style="color: var(--footer-text);">联系方式</strong><br>
+              xingfengchuang@gdei.edu.cn<br>
+              <a href="https://www.gdei.edu.cn/" target="_blank">学校官网</a>
+            </address>
         </div>
-        <div class="footer-bottom">Copyright © <span id="copyright-year">2025</span> 深度视觉实验室</div>
+        <div class="footer-bottom">
+          Copyright &copy; <span id="copyright-year">2025</span> 深度视觉实验室
+        </div>
     </footer>
-    
+
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/common.js?v=footer-reveal"></script>
     <script>
       try { document.getElementById('copyright-year').textContent = new Date().getFullYear(); } catch (e) {}
-      
       (function () {
-        try {
-          var toggle = document.querySelector('.menu-toggle');
-          var header = document.querySelector('.main-header');
-          if (toggle && header) {
-            toggle.addEventListener('click', function () { 
-                header.classList.toggle('nav-open'); 
-            });
-          }
-        } catch (e) { console.error(e); }
+        var t = document.querySelector('.menu-toggle');
+        var h = document.querySelector('.main-header');
+        if (t && h) t.addEventListener('click', function () { h.classList.toggle('nav-open'); });
       })();
     </script>
   </body>
