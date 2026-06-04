@@ -1,159 +1,80 @@
-# 广东第二师范学院深度视觉实验室官网
+# 深度视觉实验室
 
-This repository hosts the static website for the Deep Vision Lab at Guangdong University of Education.
+**Deep Vision Lab @ Guangdong University of Education**
 
-站点地址：<https://gdue-dvl.github.io/>
+深度视觉实验室隶属于广东第二师范学院，聚焦计算机视觉、人工智能与生成式视觉技术，面向教育、农业、公共安全、智能感知和视觉内容可信恢复等场景开展研究与应用探索。
 
-## 项目概览
+实验室关注从视觉理解到视觉生成的完整技术链条，强调算法研究、系统实现和场景落地的结合，鼓励学生在真实科研项目、竞赛项目和产学研合作中成长。
 
-这是一个面向实验室展示和信息维护的纯静态网站，使用 HTML、CSS 和少量 JavaScript 构建，可直接通过 GitHub Pages 部署。网站内容覆盖实验室简介、研究方向、团队成员、科研成果、新闻动态和联系方式。
+官网：<https://gdue-dvl.github.io/>
 
-当前版本采用克制的黑白灰视觉系统，并使用深绿 `#19433C` 作为小面积强调色。页面中的图片和成员照片保留原始色彩，不做灰度或滤镜处理。
+## 研究方向
 
-## 页面结构
+### 视频质量评估
 
-| 文件 | 页面 | 内容 |
-| --- | --- | --- |
-| `index.html` | 主页 | 实验室简介、核心方向、精选论文、最新动态 |
-| `research.html` | 研究方向 | 视频质量评估、农业识别、教师质量评估、扩散模型应用、人群计数 |
-| `people.html` | 团队成员 | 教师团队、学生团队、可翻转成员卡片、加入我们 |
-| `publications.html` | 科研成果 | 论文统计、按类型筛选、奖项荣誉、科研项目 |
-| `news.html` | 新闻动态 | 新闻搜索、年份筛选、类别筛选、新闻卡片 |
+围绕互联网视频服务、编码传输和显示体验，研究全参考、半参考和无参考视频质量评价方法。实验室重点关注深度学习驱动的盲视频质量评估、感知质量建模、实时质量监控和新一代视频编码标准下的质量评价。
 
-## 目录说明
+### 农业视觉识别
 
-```text
-.
-├── index.html
-├── research.html
-├── people.html
-├── publications.html
-├── news.html
-├── generate_team.py
-├── css/
-│   ├── common.css
-│   ├── style.css
-│   ├── bootstrap.min.css
-│   └── viewer.css
-├── js/
-│   ├── common.js
-│   ├── jquery.min.js
-│   ├── bootstrap.min.js
-│   ├── bootstrap-hover-dropdown.js
-│   ├── viewer.js
-│   └── menus.js
-├── images/
-│   ├── black logo.png
-│   ├── white logo.png
-│   ├── t-*.png
-│   └── s-*.jpg
-└── people/
-    ├── people.md
-    ├── t/
-    └── s/
-```
+面向智慧农业需求，研究农作物病虫害识别、作物生长监测、产量预测和农业视觉数据建模。实验室探索利用深度学习、多模态数据和移动端部署能力，为农业生产提供智能识别与决策支持。
 
-## 视觉与交互
+### 教师质量评估
 
-主要样式集中在 `css/common.css`：
+面向教育质量提升，结合计算机视觉、语音识别和自然语言处理等技术，研究教师教学行为分析、课堂互动评估、学生注意力状态分析和教学质量辅助评价系统。
 
-- 黑白灰基础界面：白色页面背景、黑灰文字、细分割线。
-- 深绿强调色：导航当前项、主按钮、筛选激活态、论文链接按钮、卡片左侧强调线。
-- 页脚：深绿背景，配合滚动透明度渐变，减少底部大色块的突兀感。
-- Logo：页脚使用 `images/white logo.png` 原图显示，不再叠加反色滤镜或透明度压暗。
+### 扩散模型与生成式视觉
 
-公共交互集中在 `js/common.js`：
+围绕扩散模型、Mamba 架构和生成式 AI 技术，研究图像生成、图像修复、局部编辑、风格迁移和真实人脸恢复等方向，推动生成式视觉技术在实际场景中的可控应用。
 
-- `initFooterReveal()` 根据页脚进入视口的比例更新 `--footer-progress`。
-- 页脚背景透明度、内容透明度和位移由 CSS 变量驱动，滚动到底部时逐步变实。
+### 人群计数与公共安全
 
-各页面也包含少量局部脚本：
+面向公共安全、城市治理和大型活动管理，研究密集人群场景下的人数估计、密度分布建模、跨场景泛化、边缘端实时推理和异常预警。
 
-- 移动端导航展开/收起。
-- `news.html` 的搜索、年份筛选和类别筛选。
-- `publications.html` 的成果类型筛选。
-- `people.html` 的成员卡片点击翻转。
+## 团队建设
 
-## 内容维护
+实验室由教师团队和学生科研团队共同组成，长期欢迎对计算机视觉、深度学习、生成式 AI、机器人感知、嵌入式视觉和智能系统感兴趣的学生加入。
 
-### 修改团队成员
+学生团队参与论文研究、大学生创新创业训练计划、学科竞赛、专利与软件著作权申报、工程系统开发和企业合作项目。实验室鼓励本科生尽早进入科研训练，在真实问题中提升算法、工程和写作能力。
 
-成员数据主要维护在 `people/people.md` 中。修改后运行：
+## 代表成果
 
-```bash
-python generate_team.py
-```
+实验室近年来围绕视频质量评估、生成式视觉、机器人操作、农业识别和教育智能分析开展研究，形成了一批论文、项目和竞赛成果。
 
-脚本会读取 `people/people.md`，并替换 `people.html` 中 `AUTO_TEACHERS` 和 `AUTO_STUDENTS` 标记之间的成员卡片。
+部分代表性论文包括：
 
-成员图片放在 `images/` 目录下，命名建议保持：
+- **CLIPVQA: Video Quality Assessment via CLIP**, IEEE Transactions on Broadcasting, 2025
+- **CoSTA: Co-training Spatial-Temporal Attention for Blind Video Quality Assessment**, Expert Systems with Applications, 2024
+- **A Diffusion-Mamba Synergetic Framework for Face Retouching Reversal**, accepted by EAAI, 2026
+- **GLEAM: Mitigating Barren Plateaus in Hybrid Quantum Machine Learning via Small-World Entanglement**, accepted by ICIPAI, 2026
+- **Kinematic Smoothness Regularization for Action Chunking in Real-World Robotic Manipulation**, EI Conference, 2026
+- **SMJ-ACT: Chunk-Aware Stable Minimum-Jerk Execution Refinement for ACT Policies**, EI Conference, 2026
 
-- 教师：`t-姓名缩写.png`
-- 学生：`s-姓名缩写.jpg`
+部分竞赛与项目成果包括：
 
-### 修改研究方向
+- 2026 年广东省挑战杯省级铜奖
+- 广东省工科大赛学生实验综合技能竞赛一等奖
+- 广州市荔湾区创新创业大赛优胜奖
+- 世界职业院校技能大赛广东赛区 AI 赛道获奖
+- 国家级、省级和校级大学生创新创业训练计划项目
 
-直接编辑 `research.html` 中的对应研究块。每个方向一般包含：
+## 项目与应用
 
-- 中文标题和英文副标题
-- 方向说明
-- 关键研究点
-- 项目标签
+实验室围绕视觉 AI 的真实场景落地开展项目研发，方向包括：
 
-### 修改科研成果
+- 面向 AI 时代的真实人脸恢复解决方案
+- 基于 diffusion-mamba 的视频图像美颜与逆向恢复
+- 基于深度学习的多模态姿态识别教师教学质量评估系统
+- 基于可控视觉触发与 SSVEP 的轻量化脑机交互控制系统
+- 基于视觉 AI 的办公区域智能照明控制系统
+- 面向养老服务的具身智能双臂机器人
+- 农业病虫害识别与智慧农业视觉监测
 
-直接编辑 `publications.html`。论文卡片使用 `data-tags` 控制筛选类型，例如：
+实验室重视产学研协同，欢迎高校、科研机构和企业围绕计算机视觉、智能感知、生成式 AI 与教育智能化方向开展合作。
 
-```html
-<div class="publication-card" data-tags="SCI">
-```
+## 联系方式
 
-筛选按钮位于页面顶部的 `.filter-section`。
+广东第二师范学院 海珠校区  
+物理与信息工程学院 校众创空间  
+深度视觉实验室
 
-### 修改新闻动态
-
-直接编辑 `news.html`。每条新闻使用 `article.news-card`，并通过 `data-year` 和 `data-type` 支持筛选：
-
-```html
-<article class="news-card" data-year="2026" data-type="paper">
-```
-
-可用类别包括 `award`、`paper` 和 `event`，如需新增类别，需要同步修改筛选按钮。
-
-## 本地预览
-
-本项目是静态网站，可使用任意静态服务器预览。例如：
-
-```bash
-python -m http.server 8000
-```
-
-然后访问：
-
-```text
-http://127.0.0.1:8000/
-```
-
-如果本机没有可用 Python，也可以使用 Node.js 或 VS Code Live Server。
-
-## 部署
-
-仓库名为 `GDUE-DVL/gdue-dvl.github.io`，默认通过 GitHub Pages 从 `main` 分支发布。将修改提交并推送到 `main` 后，GitHub Pages 会自动更新。
-
-常规发布流程：
-
-```bash
-git add .
-git commit -m "Update website"
-git push origin main
-```
-
-如果页面没有立即刷新，通常是 GitHub Pages 构建或浏览器缓存导致，等待一两分钟后强制刷新即可。
-
-## 维护注意事项
-
-- 不要删除 `.nojekyll`，它用于避免 GitHub Pages 按 Jekyll 规则处理静态文件。
-- 页面脚本依赖顺序应保持 `jquery.min.js` 在 `bootstrap.min.js` 之前。
-- 公共颜色优先在 `css/common.css` 的 `:root` 变量中修改，避免在页面内分散硬编码。
-- 页脚滚动效果依赖每个页面引用 `js/common.js?v=footer-reveal`。
-- 添加新页面时应复用 `main-header`、`main-footer` 和 `css/common.css` 中的公共样式。
+邮箱：xingfengchuang@gdei.edu.cn
